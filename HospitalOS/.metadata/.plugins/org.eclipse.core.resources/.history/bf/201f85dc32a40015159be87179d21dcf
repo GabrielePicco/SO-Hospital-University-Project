@@ -1,0 +1,15 @@
+#include <stdio.h>
+#include <unistd.h>
+#include <sys/wait.h>
+
+/**
+ * Genera ogni x secondi un nuovo paziente (processo), dove x è
+ * un tempo casuale.
+ */
+int main(int argc,char** argv){
+	while(1){
+
+		printf("Hello Word!");
+	}
+	return 0;
+}

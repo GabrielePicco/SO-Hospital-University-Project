@@ -1,0 +1,25 @@
+#include <stdio.h>
+#include <unistd.h>
+#include <sys/wait.h>
+#include <stdlib.h>
+
+/**
+ * Genera ogni x secondi un nuovo paziente (processo), dove x è
+ * un numero casuale tra 0 e 3.
+ */
+int main(int argc,char** argv){
+	int waitTime = 2;
+	pid_t pidGenerator;
+
+	pidGenerator = getpid();
+	while(pidGenerator == getpid()){
+		fork();
+		if(pidGenerator == getpid()){
+			sleep(waitTime);
+			waitTime = rand() % 4; /* numero int casuale tra 0 e 3 */
+		}else{
+			printf("\nSono il paziente X !");
+		}
+	}
+	return 0;
+}

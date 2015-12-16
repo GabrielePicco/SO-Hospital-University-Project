@@ -1,0 +1,9 @@
+#include <stdio.h>
+
+/**
+ * Paziente
+ */
+int main(int argc,char** argv){
+	printf("\nSono il paziente X !");
+	return 0;
+}
