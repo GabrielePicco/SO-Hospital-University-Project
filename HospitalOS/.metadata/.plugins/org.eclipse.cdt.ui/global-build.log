@@ -1,0 +1,15 @@
+18:18:22 **** Build of configuration Debug for project HotspitalOS ****
+make all 
+Building file: ../processGenerator.c
+Invoking: GCC C Compiler
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"processGenerator.d" -MT"processGenerator.o" -o "processGenerator.o" "../processGenerator.c"
+Finished building: ../processGenerator.c
+ 
+Building target: HotspitalOS
+Invoking: GCC C Linker
+gcc  -o "HotspitalOS"  ./processGenerator.o   
+Finished building target: HotspitalOS
+ 
+18:18:27 **** Incremental Build of configuration Debug for project HotspitalOS ****
+make all 
+make: Nothing to be done for 'all'.
