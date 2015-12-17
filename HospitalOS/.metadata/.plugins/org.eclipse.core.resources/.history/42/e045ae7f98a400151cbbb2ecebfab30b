@@ -4,6 +4,6 @@
  * Paziente
  */
 int main(int argc,char** argv){
-	printf("\nSono il paziente x o y ?!?!?!?!? !\n");
+	printf("\nSono il paziente X !\n");
 	return 0;
 }
