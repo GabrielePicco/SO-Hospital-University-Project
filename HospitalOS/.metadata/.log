@@ -8,6 +8,242 @@ Command-line arguments:  -os linux -ws gtk -arch x86_64 -product org.eclipse.epp
 
 !ENTRY org.eclipse.cdt.core 1 0 2015-12-16 18:16:08.469
 !MESSAGE Indexed 'HotspitalOS' (0 sources, 0 headers) in 0.003 sec: 0 declarations; 0 references; 0 unresolved inclusions; 0 syntax errors; 0 unresolved names (0%)
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+!SESSION 2015-12-16 21:11:31.193 -----------------------------------------------
+eclipse.buildId=4.5.1.M20150904-0015
+java.version=1.7.0_85
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.cpp.product
+Command-line arguments:  -os linux -ws gtk -arch x86_64 -product org.eclipse.epp.package.cpp.product
+
+!ENTRY org.eclipse.cdt.core 4 0 2015-12-16 23:16:17.705
+!MESSAGE Error: IOException
+!STACK 1
+org.eclipse.core.runtime.CoreException: IOException
+	at org.eclipse.cdt.internal.core.pdom.db.Database.markFileIncomplete(Database.java:775)
+	at org.eclipse.cdt.internal.core.pdom.db.Database.flushAndUnlockChunks(Database.java:738)
+	at org.eclipse.cdt.internal.core.pdom.db.Database.giveUpExclusiveLock(Database.java:700)
+	at org.eclipse.cdt.internal.core.pdom.PDOM.releaseWriteLock(PDOM.java:1069)
+	at org.eclipse.cdt.internal.core.index.WritableCIndex.releaseWriteLock(WritableCIndex.java:142)
+	at org.eclipse.cdt.internal.core.index.WritableCIndex.releaseWriteLock(WritableCIndex.java:127)
+	at org.eclipse.cdt.internal.core.pdom.AbstractIndexerTask.setResume(AbstractIndexerTask.java:627)
+	at org.eclipse.cdt.internal.core.pdom.AbstractIndexerTask.runTask(AbstractIndexerTask.java:544)
+	at org.eclipse.cdt.internal.core.pdom.indexer.PDOMIndexerTask.run(PDOMIndexerTask.java:161)
+	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:149)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: java.io.IOException: Protocol error
+	at sun.nio.ch.FileDispatcherImpl.pwrite0(Native Method)
+	at sun.nio.ch.FileDispatcherImpl.pwrite(FileDispatcherImpl.java:66)
+	at sun.nio.ch.IOUtil.writeFromNativeBuffer(IOUtil.java:89)
+	at sun.nio.ch.IOUtil.write(IOUtil.java:65)
+	at sun.nio.ch.FileChannelImpl.writeInternal(FileChannelImpl.java:770)
+	at sun.nio.ch.FileChannelImpl.write(FileChannelImpl.java:755)
+	at org.eclipse.cdt.internal.core.pdom.db.Database.markFileIncomplete(Database.java:773)
+	... 10 more
+!SUBENTRY 1 org.eclipse.cdt.core 4 0 2015-12-16 23:16:17.707
+!MESSAGE IOException
+!STACK 0
+java.io.IOException: Protocol error
+	at sun.nio.ch.FileDispatcherImpl.pwrite0(Native Method)
+	at sun.nio.ch.FileDispatcherImpl.pwrite(FileDispatcherImpl.java:66)
+	at sun.nio.ch.IOUtil.writeFromNativeBuffer(IOUtil.java:89)
+	at sun.nio.ch.IOUtil.write(IOUtil.java:65)
+	at sun.nio.ch.FileChannelImpl.writeInternal(FileChannelImpl.java:770)
+	at sun.nio.ch.FileChannelImpl.write(FileChannelImpl.java:755)
+	at org.eclipse.cdt.internal.core.pdom.db.Database.markFileIncomplete(Database.java:773)
+	at org.eclipse.cdt.internal.core.pdom.db.Database.flushAndUnlockChunks(Database.java:738)
+	at org.eclipse.cdt.internal.core.pdom.db.Database.giveUpExclusiveLock(Database.java:700)
+	at org.eclipse.cdt.internal.core.pdom.PDOM.releaseWriteLock(PDOM.java:1069)
+	at org.eclipse.cdt.internal.core.index.WritableCIndex.releaseWriteLock(WritableCIndex.java:142)
+	at org.eclipse.cdt.internal.core.index.WritableCIndex.releaseWriteLock(WritableCIndex.java:127)
+	at org.eclipse.cdt.internal.core.pdom.AbstractIndexerTask.setResume(AbstractIndexerTask.java:627)
+	at org.eclipse.cdt.internal.core.pdom.AbstractIndexerTask.runTask(AbstractIndexerTask.java:544)
+	at org.eclipse.cdt.internal.core.pdom.indexer.PDOMIndexerTask.run(PDOMIndexerTask.java:161)
+	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:149)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+
+!ENTRY org.eclipse.cdt.core 4 0 2015-12-16 23:16:17.828
+!MESSAGE Error: IOException
+!STACK 1
+org.eclipse.core.runtime.CoreException: IOException
+	at org.eclipse.cdt.internal.core.pdom.db.Chunk.flush(Chunk.java:54)
+	at org.eclipse.cdt.internal.core.pdom.db.Database.flushAndUnlockChunks(Database.java:743)
+	at org.eclipse.cdt.internal.core.pdom.db.Database.flush(Database.java:730)
+	at org.eclipse.cdt.internal.core.pdom.PDOM.flush(PDOM.java:1476)
+	at org.eclipse.cdt.internal.core.pdom.WritablePDOM.flush(WritablePDOM.java:191)
+	at org.eclipse.cdt.internal.core.index.WritableCIndex.flush(WritableCIndex.java:166)
+	at org.eclipse.cdt.internal.core.pdom.AbstractIndexerTask.runTask(AbstractIndexerTask.java:607)
+	at org.eclipse.cdt.internal.core.pdom.indexer.PDOMIndexerTask.run(PDOMIndexerTask.java:161)
+	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:149)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: java.io.IOException: Protocol error
+	at sun.nio.ch.FileDispatcherImpl.pwrite0(Native Method)
+	at sun.nio.ch.FileDispatcherImpl.pwrite(FileDispatcherImpl.java:66)
+	at sun.nio.ch.IOUtil.writeFromNativeBuffer(IOUtil.java:89)
+	at sun.nio.ch.IOUtil.write(IOUtil.java:65)
+	at sun.nio.ch.FileChannelImpl.writeInternal(FileChannelImpl.java:770)
+	at sun.nio.ch.FileChannelImpl.write(FileChannelImpl.java:755)
+	at org.eclipse.cdt.internal.core.pdom.db.Database.write(Database.java:166)
+	at org.eclipse.cdt.internal.core.pdom.db.Chunk.flush(Chunk.java:52)
+	... 9 more
+!SUBENTRY 1 org.eclipse.cdt.core 4 0 2015-12-16 23:16:17.828
+!MESSAGE IOException
+!STACK 0
+java.io.IOException: Protocol error
+	at sun.nio.ch.FileDispatcherImpl.pwrite0(Native Method)
+	at sun.nio.ch.FileDispatcherImpl.pwrite(FileDispatcherImpl.java:66)
+	at sun.nio.ch.IOUtil.writeFromNativeBuffer(IOUtil.java:89)
+	at sun.nio.ch.IOUtil.write(IOUtil.java:65)
+	at sun.nio.ch.FileChannelImpl.writeInternal(FileChannelImpl.java:770)
+	at sun.nio.ch.FileChannelImpl.write(FileChannelImpl.java:755)
+	at org.eclipse.cdt.internal.core.pdom.db.Database.write(Database.java:166)
+	at org.eclipse.cdt.internal.core.pdom.db.Chunk.flush(Chunk.java:52)
+	at org.eclipse.cdt.internal.core.pdom.db.Database.flushAndUnlockChunks(Database.java:743)
+	at org.eclipse.cdt.internal.core.pdom.db.Database.flush(Database.java:730)
+	at org.eclipse.cdt.internal.core.pdom.PDOM.flush(PDOM.java:1476)
+	at org.eclipse.cdt.internal.core.pdom.WritablePDOM.flush(WritablePDOM.java:191)
+	at org.eclipse.cdt.internal.core.index.WritableCIndex.flush(WritableCIndex.java:166)
+	at org.eclipse.cdt.internal.core.pdom.AbstractIndexerTask.runTask(AbstractIndexerTask.java:607)
+	at org.eclipse.cdt.internal.core.pdom.indexer.PDOMIndexerTask.run(PDOMIndexerTask.java:161)
+	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:149)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+
+!ENTRY org.eclipse.cdt.core 4 0 2015-12-16 23:16:17.902
+!MESSAGE Error: a fault occurred in a recent unsafe memory access operation in compiled Java code
+!STACK 0
+java.lang.InternalError: a fault occurred in a recent unsafe memory access operation in compiled Java code
+	at org.apache.lucene.util.UnicodeUtil.UTF16toUTF8(UnicodeUtil.java:270)
+	at org.apache.lucene.index.TermBuffer.read(TermBuffer.java:74)
+	at org.apache.lucene.index.SegmentTermEnum.next(SegmentTermEnum.java:133)
+	at org.apache.lucene.index.SegmentTermEnum.scanTo(SegmentTermEnum.java:174)
+	at org.apache.lucene.index.TermInfosReader.get(TermInfosReader.java:236)
+	at org.apache.lucene.index.TermInfosReader.get(TermInfosReader.java:172)
+	at org.apache.lucene.index.SegmentReader.docFreq(SegmentReader.java:509)
+	at org.apache.lucene.search.TermQuery$TermWeight$1.add(TermQuery.java:56)
+	at org.apache.lucene.util.ReaderUtil$Gather.run(ReaderUtil.java:77)
+	at org.apache.lucene.util.ReaderUtil$Gather.run(ReaderUtil.java:82)
+	at org.apache.lucene.util.ReaderUtil$Gather.run(ReaderUtil.java:66)
+	at org.apache.lucene.search.TermQuery$TermWeight.<init>(TermQuery.java:53)
+	at org.apache.lucene.search.TermQuery.createWeight(TermQuery.java:199)
+	at org.apache.lucene.search.Searcher.createNormalizedWeight(Searcher.java:168)
+	at org.apache.lucene.search.IndexSearcher.createNormalizedWeight(IndexSearcher.java:664)
+	at org.apache.lucene.search.IndexSearcher.search(IndexSearcher.java:342)
+	at org.apache.lucene.search.IndexSearcher.search(IndexSearcher.java:330)
+	at org.eclipse.epp.internal.logging.aeri.ui.log.ProblemsDatabaseService.seen(ProblemsDatabaseService.java:79)
+	at org.eclipse.epp.internal.logging.aeri.ui.log.ProblemsDatabaseService.seen(ProblemsDatabaseService.java:73)
+	at org.eclipse.epp.internal.logging.aeri.ui.log.ReportPredicates$ProblemDatabaseIgnoredPredicate.apply(ReportPredicates.java:50)
+	at org.eclipse.epp.internal.logging.aeri.ui.log.ReportPredicates$ProblemDatabaseIgnoredPredicate.apply(ReportPredicates.java:1)
+	at org.eclipse.epp.internal.logging.aeri.ui.log.PredicateDebugDecorator.apply(PredicateDebugDecorator.java:40)
+	at com.google.common.base.Predicates$AndPredicate.apply(Predicates.java:343)
+	at org.eclipse.epp.internal.logging.aeri.ui.log.LogListener.logging(LogListener.java:118)
+	at org.eclipse.core.internal.runtime.RuntimeLog.logToListeners(RuntimeLog.java:161)
+	at org.eclipse.core.internal.runtime.PlatformLogWriter.logged(PlatformLogWriter.java:103)
+	at org.eclipse.osgi.internal.log.ExtendedLogReaderServiceFactory.safeLogged(ExtendedLogReaderServiceFactory.java:88)
+	at org.eclipse.osgi.internal.log.ExtendedLogReaderServiceFactory.logPrivileged(ExtendedLogReaderServiceFactory.java:217)
+	at org.eclipse.osgi.internal.log.ExtendedLogReaderServiceFactory.log(ExtendedLogReaderServiceFactory.java:189)
+	at org.eclipse.osgi.internal.log.ExtendedLogServiceFactory.log(ExtendedLogServiceFactory.java:65)
+	at org.eclipse.osgi.internal.log.ExtendedLogServiceImpl.log(ExtendedLogServiceImpl.java:87)
+	at org.eclipse.osgi.internal.log.LoggerImpl.log(LoggerImpl.java:54)
+	at org.eclipse.core.internal.runtime.Log.log(Log.java:65)
+	at org.eclipse.cdt.core.CCorePlugin.log(CCorePlugin.java:1439)
+	at org.eclipse.cdt.core.CCorePlugin.log(CCorePlugin.java:1418)
+	at org.eclipse.cdt.core.CCorePlugin.log(CCorePlugin.java:1405)
+	at org.eclipse.cdt.internal.core.pdom.AbstractIndexerTask.logException(AbstractIndexerTask.java:457)
+	at org.eclipse.cdt.internal.core.pdom.AbstractIndexerTask.runTask(AbstractIndexerTask.java:610)
+	at org.eclipse.cdt.internal.core.pdom.indexer.PDOMIndexerTask.run(PDOMIndexerTask.java:161)
+	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:149)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+
+!ENTRY org.eclipse.core.jobs 4 2 2015-12-17 09:04:55.418
+!MESSAGE An internal error occurred during: "C/C++ Indexer".
+!STACK 0
+java.lang.InternalError: a fault occurred in a recent unsafe memory access operation in compiled Java code
+	at org.apache.lucene.util.UnicodeUtil.UTF16toUTF8(UnicodeUtil.java:277)
+	at org.apache.lucene.index.TermBuffer.read(TermBuffer.java:74)
+	at org.apache.lucene.index.SegmentTermEnum.next(SegmentTermEnum.java:133)
+	at org.apache.lucene.index.SegmentTermEnum.scanTo(SegmentTermEnum.java:174)
+	at org.apache.lucene.index.TermInfosReader.get(TermInfosReader.java:236)
+	at org.apache.lucene.index.TermInfosReader.get(TermInfosReader.java:172)
+	at org.apache.lucene.index.SegmentReader.docFreq(SegmentReader.java:509)
+	at org.apache.lucene.search.TermQuery$TermWeight$1.add(TermQuery.java:56)
+	at org.apache.lucene.util.ReaderUtil$Gather.run(ReaderUtil.java:77)
+	at org.apache.lucene.util.ReaderUtil$Gather.run(ReaderUtil.java:82)
+	at org.apache.lucene.util.ReaderUtil$Gather.run(ReaderUtil.java:66)
+	at org.apache.lucene.search.TermQuery$TermWeight.<init>(TermQuery.java:53)
+	at org.apache.lucene.search.TermQuery.createWeight(TermQuery.java:199)
+	at org.apache.lucene.search.Searcher.createNormalizedWeight(Searcher.java:168)
+	at org.apache.lucene.search.IndexSearcher.createNormalizedWeight(IndexSearcher.java:664)
+	at org.apache.lucene.search.IndexSearcher.search(IndexSearcher.java:342)
+	at org.apache.lucene.search.IndexSearcher.search(IndexSearcher.java:330)
+	at org.eclipse.epp.internal.logging.aeri.ui.log.ProblemsDatabaseService.seen(ProblemsDatabaseService.java:79)
+	at org.eclipse.epp.internal.logging.aeri.ui.log.ProblemsDatabaseService.seen(ProblemsDatabaseService.java:73)
+	at org.eclipse.epp.internal.logging.aeri.ui.log.ReportPredicates$ProblemDatabaseIgnoredPredicate.apply(ReportPredicates.java:50)
+	at org.eclipse.epp.internal.logging.aeri.ui.log.ReportPredicates$ProblemDatabaseIgnoredPredicate.apply(ReportPredicates.java:1)
+	at org.eclipse.epp.internal.logging.aeri.ui.log.PredicateDebugDecorator.apply(PredicateDebugDecorator.java:40)
+	at com.google.common.base.Predicates$AndPredicate.apply(Predicates.java:343)
+	at org.eclipse.epp.internal.logging.aeri.ui.log.LogListener.logging(LogListener.java:118)
+	at org.eclipse.core.internal.runtime.RuntimeLog.logToListeners(RuntimeLog.java:161)
+	at org.eclipse.core.internal.runtime.PlatformLogWriter.logged(PlatformLogWriter.java:103)
+	at org.eclipse.osgi.internal.log.ExtendedLogReaderServiceFactory.safeLogged(ExtendedLogReaderServiceFactory.java:88)
+	at org.eclipse.osgi.internal.log.ExtendedLogReaderServiceFactory.logPrivileged(ExtendedLogReaderServiceFactory.java:217)
+	at org.eclipse.osgi.internal.log.ExtendedLogReaderServiceFactory.log(ExtendedLogReaderServiceFactory.java:189)
+	at org.eclipse.osgi.internal.log.ExtendedLogServiceFactory.log(ExtendedLogServiceFactory.java:65)
+	at org.eclipse.osgi.internal.log.ExtendedLogServiceImpl.log(ExtendedLogServiceImpl.java:87)
+	at org.eclipse.osgi.internal.log.LoggerImpl.log(LoggerImpl.java:54)
+	at org.eclipse.core.internal.runtime.Log.log(Log.java:65)
+	at org.eclipse.cdt.core.CCorePlugin.log(CCorePlugin.java:1439)
+	at org.eclipse.cdt.core.CCorePlugin.log(CCorePlugin.java:1418)
+	at org.eclipse.cdt.core.CCorePlugin.log(CCorePlugin.java:1405)
+	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:170)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+
+!ENTRY org.eclipse.core.jobs 4 2 2015-12-17 09:04:55.529
+!MESSAGE Unhandled error
+!STACK 0
+java.lang.InternalError: a fault occurred in a recent unsafe memory access operation in compiled Java code
+	at org.apache.lucene.util.ArrayUtil.grow(ArrayUtil.java:344)
+	at org.apache.lucene.util.UnicodeUtil.UTF16toUTF8(UnicodeUtil.java:277)
+	at org.apache.lucene.index.TermBuffer.read(TermBuffer.java:74)
+	at org.apache.lucene.index.SegmentTermEnum.next(SegmentTermEnum.java:133)
+	at org.apache.lucene.index.SegmentTermEnum.scanTo(SegmentTermEnum.java:174)
+	at org.apache.lucene.index.TermInfosReader.get(TermInfosReader.java:236)
+	at org.apache.lucene.index.TermInfosReader.get(TermInfosReader.java:172)
+	at org.apache.lucene.index.SegmentReader.docFreq(SegmentReader.java:509)
+	at org.apache.lucene.search.TermQuery$TermWeight$1.add(TermQuery.java:56)
+	at org.apache.lucene.util.ReaderUtil$Gather.run(ReaderUtil.java:77)
+	at org.apache.lucene.util.ReaderUtil$Gather.run(ReaderUtil.java:82)
+	at org.apache.lucene.util.ReaderUtil$Gather.run(ReaderUtil.java:66)
+	at org.apache.lucene.search.TermQuery$TermWeight.<init>(TermQuery.java:53)
+	at org.apache.lucene.search.TermQuery.createWeight(TermQuery.java:199)
+	at org.apache.lucene.search.Searcher.createNormalizedWeight(Searcher.java:168)
+	at org.apache.lucene.search.IndexSearcher.createNormalizedWeight(IndexSearcher.java:664)
+	at org.apache.lucene.search.IndexSearcher.search(IndexSearcher.java:342)
+	at org.apache.lucene.search.IndexSearcher.search(IndexSearcher.java:330)
+	at org.eclipse.epp.internal.logging.aeri.ui.log.ProblemsDatabaseService.seen(ProblemsDatabaseService.java:79)
+	at org.eclipse.epp.internal.logging.aeri.ui.log.ProblemsDatabaseService.seen(ProblemsDatabaseService.java:73)
+	at org.eclipse.epp.internal.logging.aeri.ui.log.ReportPredicates$ProblemDatabaseIgnoredPredicate.apply(ReportPredicates.java:50)
+	at org.eclipse.epp.internal.logging.aeri.ui.log.ReportPredicates$ProblemDatabaseIgnoredPredicate.apply(ReportPredicates.java:1)
+	at org.eclipse.epp.internal.logging.aeri.ui.log.PredicateDebugDecorator.apply(PredicateDebugDecorator.java:40)
+	at com.google.common.base.Predicates$AndPredicate.apply(Predicates.java:343)
+	at org.eclipse.epp.internal.logging.aeri.ui.log.LogListener.logging(LogListener.java:118)
+	at org.eclipse.core.internal.runtime.RuntimeLog.logToListeners(RuntimeLog.java:161)
+	at org.eclipse.core.internal.runtime.PlatformLogWriter.logged(PlatformLogWriter.java:103)
+	at org.eclipse.osgi.internal.log.ExtendedLogReaderServiceFactory.safeLogged(ExtendedLogReaderServiceFactory.java:88)
+	at org.eclipse.osgi.internal.log.ExtendedLogReaderServiceFactory.logPrivileged(ExtendedLogReaderServiceFactory.java:217)
+	at org.eclipse.osgi.internal.log.ExtendedLogReaderServiceFactory.log(ExtendedLogReaderServiceFactory.java:189)
+	at org.eclipse.osgi.internal.log.ExtendedLogServiceFactory.log(ExtendedLogServiceFactory.java:65)
+	at org.eclipse.osgi.internal.log.ExtendedLogServiceImpl.log(ExtendedLogServiceImpl.java:87)
+	at org.eclipse.osgi.internal.log.LoggerImpl.log(LoggerImpl.java:54)
+	at org.eclipse.core.internal.runtime.PlatformLogWriter.logging(PlatformLogWriter.java:44)
+	at org.eclipse.core.internal.runtime.RuntimeLog.log(RuntimeLog.java:97)
+	at org.eclipse.core.internal.jobs.JobManager.endJob(JobManager.java:701)
+	at org.eclipse.core.internal.jobs.WorkerPool.endJob(WorkerPool.java:105)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:72)
+=======
+>>>>>>> Stashed changes
 !SESSION 2015-12-17 09:30:10.912 -----------------------------------------------
 eclipse.buildId=4.4.2.M20150204-1700
 java.version=1.8.0_65
@@ -164,3 +400,7 @@ user global configuration and to define the default location to store repositori
 not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
 EGit might behave differently since they see different configuration options.
 This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+<<<<<<< Updated upstream
+=======
+>>>>>>> origin/master
+>>>>>>> Stashed changes
