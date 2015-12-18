@@ -13,3 +13,57 @@ Finished building target: HotspitalOS
 18:18:27 **** Incremental Build of configuration Debug for project HotspitalOS ****
 make all 
 make: Nothing to be done for 'all'.
+10:40:40 **** Incremental Build of configuration Debug for project HotspitalOS ****
+make all 
+'Building file: ../paziente.c'
+'Invoking: GCC C Compiler'
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"paziente.d" -MT"paziente.o" -o "paziente.o" "../paziente.c"
+../paziente.c: In function 'main':
+../paziente.c:7:2: warning: implicit declaration of function 'rand' [-Wimplicit-function-declaration]
+  int sintomo = rand() % 10;
+  ^
+'Finished building: ../paziente.c'
+' '
+'Building file: ../processGenerator.c'
+'Invoking: GCC C Compiler'
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"processGenerator.d" -MT"processGenerator.o" -o "processGenerator.o" "../processGenerator.c"
+../processGenerator.c:3:22: fatal error: sys/wait.h: No such file or directory
+ #include <sys/wait.h>
+                      ^
+compilation terminated.
+make: *** [processGenerator.o] Error 1
+10:44:51 **** Incremental Build of configuration Debug for project HotspitalOS ****
+make all 
+'Building file: ../paziente.c'
+'Invoking: GCC C Compiler'
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"paziente.d" -MT"paziente.o" -o "paziente.o" "../paziente.c"
+'Finished building: ../paziente.c'
+' '
+'Building file: ../processGenerator.c'
+'Invoking: GCC C Compiler'
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"processGenerator.d" -MT"processGenerator.o" -o "processGenerator.o" "../processGenerator.c"
+../processGenerator.c:3:22: fatal error: sys/wait.h: No such file or directory
+ #include <sys/wait.h>
+                      ^
+compilation terminated.
+make: *** [processGenerator.o] Error 1
+12:09:04 **** Incremental Build of configuration Debug for project HotspitalOS ****
+make all 
+'Building file: ../paziente.c'
+'Invoking: GCC C Compiler'
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"paziente.d" -MT"paziente.o" -o "paziente.o" "../paziente.c"
+../paziente.c:4:21: fatal error: sys/msg.h: No such file or directory
+ #include <sys/msg.h>
+                     ^
+compilation terminated.
+make: *** [paziente.o] Error 1
+12:11:44 **** Incremental Build of configuration Debug for project HotspitalOS ****
+make all 
+'Building file: ../paziente.c'
+'Invoking: GCC C Compiler'
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"paziente.d" -MT"paziente.o" -o "paziente.o" "../paziente.c"
+../paziente.c:4:21: fatal error: sys/msg.h: No such file or directory
+ #include <sys/msg.h>
+                     ^
+compilation terminated.
+make: *** [paziente.o] Error 1

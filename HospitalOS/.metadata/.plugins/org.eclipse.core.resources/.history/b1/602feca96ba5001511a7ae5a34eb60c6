@@ -1,0 +1,10 @@
+#include <stdio.h>
+
+/**
+ * Paziente
+ */
+int main(int argc,char** argv){
+	int sintomo = rand() % 10;
+	printf("Sintomo scelto: %d", sintomo);
+	return 0;
+}

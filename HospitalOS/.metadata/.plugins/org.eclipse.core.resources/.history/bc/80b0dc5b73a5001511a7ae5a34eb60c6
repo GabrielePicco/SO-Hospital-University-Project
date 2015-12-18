@@ -1,0 +1,56 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+char* lettura_sintomo(FILE*file_sintomi, int sin);
+void conta_righe(FILE* file_sintomi, int* conta_righe);
+
+/**
+ * Paziente
+ */
+int main(int argc,char** argv){
+	FILE*file_sintomi; 	//Apertura file sintomi
+	file_sintomi = fopen("Sintomi.txt", "r");
+	if( file_sintomi==NULL ) {
+	    perror("Errore in apertura del file");
+	    exit(1);
+	  }
+	int righe_file = 0;
+	conta_righe(file_sintomi,&righe_file);
+	rewind(file_sintomi);
+	int sin = rand() % righe_file; //Generazione di un numero random per la scelta del sintomo
+	printf("Sintomo scelto: %d", sin);
+	char* sintomo;
+	sintomo = lettura_sintomo(file_sintomi,sin);
+	return 0;
+}
+
+/*lettura_sintomo prende come parametri: un puntatore a FILE che è indirizzato ad un file aperto
+ * e un intero che contiene il numero della riga in cui si trova il sintomo da restituire in output
+ */
+char* lettura_sintomo(FILE*file_sintomi, int sin){
+	char* sintomo;
+	int i = 0;
+	char c;
+	while(i < sin){
+		fgets(sintomo,200,file_sintomi);
+		i++;
+	}
+	for(i = 0;(c = fgetc(file_sintomi)) != ';';i++){
+	        sintomo[i] = c;
+	    }
+	    sintomo[i]='\0';
+	    rewind(file_sintomi);
+	    return sintomo;
+
+
+}
+
+void conta_righe(FILE* file_sintomi, int* size){
+    int i = 1;
+    char c;
+    while ((c = fgetc(file_sintomi)) != EOF){
+             if (c=='\n')
+               i++;
+    }
+    *size = i;
+}
