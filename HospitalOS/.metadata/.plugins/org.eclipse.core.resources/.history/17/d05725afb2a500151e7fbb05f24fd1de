@@ -21,7 +21,6 @@
 int creaSemPazienti();
 void avviaTriage();
 int getNumMaxPazienti();
-void rimuoviSemaforo(int semid);
 
 /**
  * Genera ogni x secondi un nuovo paziente (processo), dove x è

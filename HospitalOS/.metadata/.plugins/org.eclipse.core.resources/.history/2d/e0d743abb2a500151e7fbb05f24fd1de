@@ -18,10 +18,9 @@
 	};
 #endif
 
-int creaSemPazienti();
+void creaSemPazienti();
 void avviaTriage();
 int getNumMaxPazienti();
-void rimuoviSemaforo(int semid);
 
 /**
  * Genera ogni x secondi un nuovo paziente (processo), dove x è
@@ -56,7 +55,7 @@ int main(int argc,char** argv){
  * Funzione che crea il semaforo per l'accesso all'ospedale dei pazienti
  * vieni inizializzato con il valore contenuto del file config.ini
  */
-int creaSemPazienti(){
+void creaSemPazienti(){
 	key_t key;
 	union semun arg;
 	int semid;
@@ -83,14 +82,6 @@ int creaSemPazienti(){
 		exit(EXIT_FAILURE);
 	}
 	printf("\n<--- Semaforo di controllo degli ingressi all'ospedale crearo e numero massimo dei pazienti in ingresso impostato a %d--->\n",numPazienti);
-	return semid;
-}
-
-void rimuoviSemaforo(int semid){
-	if(semctl(semid,0,IPC_RMID,NULL) == -1){
-		perror("Errore eliminazione semaforo ingresso");
-		exit(EXIT_FAILURE);
-	}
 }
 
 /**

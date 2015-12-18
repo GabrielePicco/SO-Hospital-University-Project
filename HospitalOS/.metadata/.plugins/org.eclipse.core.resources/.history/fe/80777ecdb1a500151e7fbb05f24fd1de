@@ -2,16 +2,12 @@
 #include <stdlib.h>
 #include <sys/types.h>
 #include <sys/msg.h>
-#include <sys/ipc.h>
-#include <sys/sem.h>
 #include <unistd.h>
 
 #define N 50
 char* lettura_sintomo(FILE*file_sintomi, int sin);
 void conta_righe(FILE* file_sintomi, int* conta_righe);
 int getIdSemaforo();
-void prenotaSemaforo(int semid);
-void rilasciaSemaforo(int semid);
 
 /* STRUTTURA DELLA CODA DI MESSAGGI */
 struct my_msg {
@@ -42,9 +38,8 @@ int main(int argc, char** argv) {
 	sintomo = lettura_sintomo(file_sintomi, sin);
 	printf("Il sintomo %d corrisponde al sintomo %s\n", sin, sintomo);
 
-	//Accesso al semaforo
+	//Accesso al semaforo da fare
 	semid = getIdSemaforo();
-	prenotaSemaforo(semid);
 
 	int msgid = msgget(IPC_PRIVATE, IPC_CREAT | 0666); // creo la coda di messaggi
 	if (msgid == -1) {
@@ -69,7 +64,6 @@ int main(int argc, char** argv) {
 	}
 
 	//riliascia semaforo
-	rilasciaSemaforo(semid);
 
 	return 0;
 }
@@ -125,24 +119,9 @@ int getIdSemaforo(){
 
 //prenota il semaforo di ingresso
 void prenotaSemaforo(int semid){
-	struct sembuf sop;
-	sop.sem_num = 0; // specifica il primo semaforo nel set
-	sop.sem_op = -1; // decrementa di 1 il semaforo
-	sop.sem_flg = 0;
+	sop.sem_op = 1;
 	if(semop(semid,&sop,1) == -1){
-		perror("Paziente: Errore sulla prenotazione del semaforo di ingresso");
-		exit(EXIT_FAILURE);
-	}
-}
-
-//rilascia il semaforo di ingresso
-void rilasciaSemaforo(int semid){
-	struct sembuf sop;
-	sop.sem_num = 0; // specifica il primo semaforo nel set
-	sop.sem_op = 1; // incrementa di 1 il semaforo
-	sop.sem_flg = 0;
-	if(semop(semid,&sop,1) == -1){
-		perror("Paziente: Errore sulla prenotazione del semaforo di ingresso");
+		perror("Paziente: Errore sulla prenotazione del semfato di ingresso");
 		exit(EXIT_FAILURE);
 	}
 }

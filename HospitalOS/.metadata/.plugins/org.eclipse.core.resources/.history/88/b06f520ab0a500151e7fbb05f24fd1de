@@ -2,16 +2,11 @@
 #include <stdlib.h>
 #include <sys/types.h>
 #include <sys/msg.h>
-#include <sys/ipc.h>
-#include <sys/sem.h>
 #include <unistd.h>
 
 #define N 50
 char* lettura_sintomo(FILE*file_sintomi, int sin);
 void conta_righe(FILE* file_sintomi, int* conta_righe);
-int getIdSemaforo();
-void prenotaSemaforo(int semid);
-void rilasciaSemaforo(int semid);
 
 /* STRUTTURA DELLA CODA DI MESSAGGI */
 struct my_msg {
@@ -24,9 +19,6 @@ struct my_msg {
  */
 int main(int argc, char** argv) {
 	struct my_msg msg;
-
-	int semid;
-
 	FILE*file_sintomi; 	//Apertura file sintomi
 	file_sintomi = fopen("Sintomi.txt", "r");
 	if (file_sintomi == NULL) {
@@ -42,9 +34,7 @@ int main(int argc, char** argv) {
 	sintomo = lettura_sintomo(file_sintomi, sin);
 	printf("Il sintomo %d corrisponde al sintomo %s\n", sin, sintomo);
 
-	//Accesso al semaforo
-	semid = getIdSemaforo();
-	prenotaSemaforo(semid);
+	//Accesso al semaforo da fare
 
 	int msgid = msgget(IPC_PRIVATE, IPC_CREAT | 0666); // creo la coda di messaggi
 	if (msgid == -1) {
@@ -69,7 +59,6 @@ int main(int argc, char** argv) {
 	}
 
 	//riliascia semaforo
-	rilasciaSemaforo(semid);
 
 	return 0;
 }
@@ -103,46 +92,4 @@ void conta_righe(FILE* file_sintomi, int* size) {
 			i++;
 	}
 	*size = i;
-}
-
-//Restituisce l'id del semaforo di ingresso creato da processGenerator.c
-int getIdSemaforo(){
-	key_t key;
-	int semid;
-	//Genero la chiave per il semaforo
-	if((key = ftok("processGenerator.c",']')) == -1){
-		perror("Paziente: Errore nella creazione delle chiave del semaforo pazienti con ftok");
-		exit(EXIT_FAILURE);
-	}
-
-	//Ottengo semaforo
-	if((semid = semget(key,1,0666)) == 1){
-		perror("Paziente: Errore nel trovare semaforo pazienti");
-		exit(EXIT_FAILURE);
-	}
-	return semid;
-}
-
-//prenota il semaforo di ingresso
-void prenotaSemaforo(int semid){
-	struct sembuf sop;
-	sop.sem_num = 0; // specifica il primo semaforo nel set
-	sop.sem_op = -1; // decrementa di 1 il semaforo
-	sop.sem_flg = 0;
-	if(semop(semid,&sop,1) == -1){
-		perror("Paziente: Errore sulla prenotazione del semaforo di ingresso");
-		exit(EXIT_FAILURE);
-	}
-}
-
-//rilascia il semaforo di ingresso
-void rilasciaSemaforo(int semid){
-	struct sembuf sop;
-	sop.sem_num = 0; // specifica il primo semaforo nel set
-	sop.sem_op = 1; // incrementa di 1 il semaforo
-	sop.sem_flg = 0;
-	if(semop(semid,&sop,1) == -1){
-		perror("Paziente: Errore sulla prenotazione del semaforo di ingresso");
-		exit(EXIT_FAILURE);
-	}
 }
