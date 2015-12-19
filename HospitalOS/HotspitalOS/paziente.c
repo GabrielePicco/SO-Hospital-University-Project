@@ -36,6 +36,7 @@ int main(int argc, char** argv) {
 	int righe_file = 0;
 	conta_righe(file_sintomi, &righe_file);
 	rewind(file_sintomi);
+	srand(time(NULL)); //funzione di randomizzazione
 	int sin = rand() % righe_file; //Generazione di un numero random per la scelta del sintomo
 	printf("Sintomo scelto: %d\n", sin);
 	char* sintomo;
