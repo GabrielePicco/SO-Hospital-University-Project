@@ -5,6 +5,7 @@
 #include <sys/ipc.h>
 #include <sys/sem.h>
 #include <unistd.h>
+#include <time.h>
 
 #define N 50
 char* lettura_sintomo(FILE*file_sintomi, int sin);
@@ -117,7 +118,7 @@ int getIdSemaforo(){
 	}
 
 	//Ottengo semaforo
-	if((semid = semget(key,1,0666)) == 1){
+	if((semid = semget(key,1,0666)) == -1){
 		perror("Paziente: Errore nel trovare semaforo pazienti");
 		exit(EXIT_FAILURE);
 	}
