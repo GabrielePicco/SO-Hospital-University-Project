@@ -1,0 +1,112 @@
+/**
+ * Gestisce il paziente tramite coda di messaggi con priorita' per x secondi e poi con coda di
+ * messaggi FIFO per y secondi. Eroga prestazione del paziente
+ */
+
+#include <stdio.h>
+#include <unistd.h>
+#include <sys/wait.h>
+#include <stdlib.h>
+#include <string.h>
+
+#include <signal.h>
+#include <sys/types.h>
+#include <sys/msg.h>
+
+#define N 50
+
+typedef enum {
+	false = 0, true = 1
+} boolean;
+
+/* STRUCT PER CODA DI MESSAGGI */
+struct my_msg {
+	long mtype;    // tipo di messaggio
+	char mtext[N];  // corpo messaggio
+};
+
+/* EXTERN VARIABLE */
+boolean prior = true;   // variabile per coda di messaggi
+int sec = 4;            // tempo per il prossimo SIGALRM
+
+/* PROTOTIPI */
+void setPriorita(int num_segnale);
+
+/* FUNCTION */
+int main(int argc, char** argv) {
+
+	struct my_msg msg;
+
+	pid_t pid = 275432;
+	key_t key = 1234;
+	char sintomo[] = "Febbre alta";
+
+	signal(SIGALRM, setPriorita);
+	alarm(sec);   // dopo sec secondi manda segnale SIGALRM
+	//key_t key = ftok("reparto.c", '#');   // creo chiave per coda di reparto
+	if (key == -1) {
+		perror("Prestazione: errore creazione chiave\n");
+		exit(EXIT_FAILURE);
+	}
+	printf("Prestazione: la chiave per coda messaggi di reparto e' %d\n", key);
+
+	printf("Prestazione: accedo alla coda di messaggi di reparto\n");
+	int msgid = msgget(key, IPC_CREAT | 0666);   // accedo coda di messaggi reparto
+	if (msgid == -1) {
+		perror("Prestazione: errore creazione coda\n");
+		exit(EXIT_FAILURE);
+	}
+
+	int count = 8;
+	while (count >= 0) {
+		msg.mtype = 1;
+		sprintf(msg.mtext, "%s;%d", sintomo, pid); // scrive sulla mtext il sintomo e la chiave della coda del paziente
+		if (msgsnd(msgid, &msg, sizeof(msg), 0) == -1) { // scrive sull coda di messaggi
+			perror("Paziente: errore scrittura nella coda triage\n");
+			exit(EXIT_FAILURE);
+		}
+		printf("%d\n", count);
+		count--;
+	}
+	/* Ciclo infinito per leggere su coda di priorita' o FIFO */
+	while (1) {
+		if (prior == true) {   // leggo su coda priorita'
+			if (msgrcv(msgid, &msg, sizeof(msg), -10, 0) == -1) { // va in errore se mtext > maxmsgsz
+				perror("Prestazione: errore ricezione messaggio\n");
+				exit(EXIT_FAILURE);
+			}
+			printf("Prestazione: letto su coda priorita %s\n", msg.mtext);
+		} else {   // leggo su coda FIFO
+			if (msgrcv(msgid, &msg, sizeof(msg), 0, 0) == -1) { // va in errore se mtext > maxmsgsz
+				perror("Prestazione: errore ricezione messaggio\n");
+				exit(EXIT_FAILURE);
+			}
+			printf("Prestazione: letto su coda FIFO %s\n", msg.mtext);
+		}
+		sleep(1);   // attendo un secondo
+
+
+		printf("Prestazione: paziente con PID %d curato\n", pid);
+	}
+
+	return 0;
+}
+
+/**
+ *  Funzione per gestire SIGALRM. Setta la variabile prior in modo da gestire
+ *  il paziente o con coda di messaggi per priorita' (prior = true) o con FIFO (prior = false).
+ */
+void setPriorita(int num_segnale) {
+	printf("Prestazione: segnale SIGALRM ricevuto\n");
+
+	if (prior == true) {
+		prior = false;
+		sec = 2;
+	} else {
+		prior = true;
+		sec = 4;
+	}
+
+	alarm(sec);
+}
+
