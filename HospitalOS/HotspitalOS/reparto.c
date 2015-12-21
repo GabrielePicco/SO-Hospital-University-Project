@@ -52,7 +52,7 @@ int main(int argc, char** argv) {
 	return 0;
 }
 
-
+// problema su priorita[j] in strcpy
 int split_str(char* str){
 	int i;
 	char* priorita;
