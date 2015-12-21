@@ -47,7 +47,7 @@ int main(int argc, char** argv) {
 
 	while (1) {
 		msg.mytype = (10 - priorita);
-		//strcpy(msg.mtext,esempio); // sostituire esempio con dati da FIFO
+		strcpy(msg.mtext,esempio); // sostituire esempio con dati da FIFO
 		if (msgsnd(msgid, &msg, sizeof(msg), 0) == -1) { // va in errore se mtext > maxmsgsz
 			perror("Reparto: errore scrittura messaggio\n");
 			exit(EXIT_FAILURE);
