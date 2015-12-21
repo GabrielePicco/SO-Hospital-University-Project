@@ -7,7 +7,9 @@
 #include <sys/types.h>
 #include <sys/msg.h>
 
-#define N 20
+#define N 50
+
+typedef enum {false = 0,true = 1}boolean;
 
 /* STRUCT PER CODA DI MESSAGGI */
 struct my_msg {
@@ -15,11 +17,16 @@ struct my_msg {
 	char mtext[N];  // corpo messaggio
 };
 
+char* getSintomo(char* str);
+char* getPazientePid(char* str);
+char* getPriorita(char* sintomo,FILE* fp);
+
 /* FUNCTION */
 int main(int argc, char** argv) {
 
 	int i;
-	char sintomo[N], key_paz[N];
+	char* sintomo;
+	char* pid_paziente;
 	struct my_msg msg;
 
 	printf("Triage: creo coda di messaggi\n");
@@ -37,13 +44,13 @@ int main(int argc, char** argv) {
 		exit(EXIT_FAILURE);
 	}
 
-	FILE* fp = fopen("Sintomi.txt", "r");  // apro il file dei sintomi
-	if (fp == NULL) {
+	FILE* fpSintomi = fopen("Sintomi.txt", "r");  // apro il file dei sintomi
+	if (fpSintomi  == NULL) {
 		perror("Triage: errore apertura file\n");
 		exit(EXIT_FAILURE);
 	}
 
-	/* Ciclo infinito per associare priorità a sintomo letto da coda di messaggi */
+	/* Ciclo infinito per associare priorita' a sintomo letto da coda di messaggi */
 	while (1) {
 		printf("Triage: leggo su coda di messaggi %d\n", msgid);
 		/* leggo il primo messaggio arrivato su coda */
@@ -54,27 +61,69 @@ int main(int argc, char** argv) {
 		printf("Triage: stampo il messaggio\n");
 		printf("Triage: %s\n", msg.mtext);
 
-		// recupero chiave e messaggio da mtext
 
-		/*
-		 int j;
+		// recupero pid e messaggio da mtext
+		 sintomo = getSintomo(msg.mtext);
+		 pid_paziente = getPazientePid(msg.mtext);
 
-		 for (i = 0; msg.mtext[i] != ';'; i++)
-		 key_paz[i] = msg.mtext[i];
-		 key_paz[i] = '\0';
 
-		 for (i = i + 1, j = 0; msg.mtext[i] != ';'; i++,j++)
-		 sintomo[j] = msg.mtext[i];
-		 sintomo[j] = '\0';
-
-		 fclose(fp);
-
-		 printf("%s\n", key_paz);
 		 printf("%s\n", sintomo);
-		 */
-		// scrivo sintomo e priorità su FIFO
+		 printf("%s\n", pid_paziente);
+		 printf("\n<--- Priorita': %s --->\n",getPriorita(sintomo,fpSintomi));
+
+		 free(sintomo);
+		 free(pid_paziente);
+
+		// scrivo sintomo e priorita' su FIFO
 	}
 
+	fclose(fpSintomi);
+
 	return 0;
+}
+
+char* getSintomo(char* str){
+	char* sintomo;
+	sintomo = (char*)malloc(sizeof(char)*N);
+	int i;
+	for (i = 0; str[i] != ';'; i++){
+		 sintomo[i] = str[i];
+	 }
+	 sintomo[i] = '\0';
+	 return sintomo;
+}
+
+char* getPazientePid(char* str){
+	int i;
+	char* pid;
+	pid = (char*)malloc(sizeof(char)*N);
+	for (i = 0; str[i] != ';'; i++);
+
+	 int j;
+	 i++;
+	 if(str[i] == ' '){
+		 i++;
+	 }
+	 for (j = 0; str[i] != '\0'; i++,j++){
+		 pid[j] = str[i];
+	 }
+	 pid[j] = '\0';
+	 return pid;
+}
+
+char* getPriorita(char* sintomo,FILE* fp){
+	boolean trov = false;
+	char* buf;
+	buf = (char*)malloc(sizeof(char)*N);
+	while(!trov && fgets(buf,(N-1),fp) != NULL){
+		if(strcmp(getSintomo(buf),sintomo) == 0){
+			strcpy(buf,getPazientePid(buf));
+			trov = true;
+		}
+	}
+	if(!trov){
+		strcpy(buf,"-1");
+	}
+	return buf;
 }
 

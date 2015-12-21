@@ -1,0 +1,100 @@
+#include <stdio.h>
+#include <unistd.h>
+#include <sys/wait.h>
+#include <stdlib.h>
+#include <string.h>
+
+#include <sys/types.h>
+#include <sys/msg.h>
+
+#define N 20
+
+/* STRUCT PER CODA DI MESSAGGI */
+struct my_msg {
+	long mtype;    // tipo di messaggio
+	char mtext[N];  // corpo messaggio
+};
+
+char* getSintomo(char* str);
+int getPazientePid(char* str);
+
+/* FUNCTION */
+int main(int argc, char** argv) {
+
+	int i;
+	char sintomo[N], key_paz[N];
+	struct my_msg msg;
+
+	printf("Triage: creo coda di messaggi\n");
+
+	key_t key = ftok("triage.c", '(');   // creo chiave per coda di triage
+	if (key == -1) {
+		perror("Triage: errore creazione chiave\n");
+		exit(EXIT_FAILURE);
+	}
+	printf("Triage: la chiave per coda messaggi del triage e' %d\n", key);
+
+	int msgid = msgget(key, IPC_CREAT | 0666);   // creo coda di messaggi
+	if (msgid == -1) {
+		perror("Triage: errore creazione coda\n");
+		exit(EXIT_FAILURE);
+	}
+
+	FILE* fp = fopen("Sintomi.txt", "r");  // apro il file dei sintomi
+	if (fp == NULL) {
+		perror("Triage: errore apertura file\n");
+		exit(EXIT_FAILURE);
+	}
+
+	/* Ciclo infinito per associare priorit� a sintomo letto da coda di messaggi */
+	//while (1) {
+		printf("Triage: leggo su coda di messaggi %d\n", msgid);
+		/* leggo il primo messaggio arrivato su coda */
+		if (msgrcv(msgid, &msg, sizeof(msg), 0, 0) == -1) { // va in errore se mtext > maxmsgsz
+			perror("Triage: errore ricezione messaggio\n");
+			//exit(EXIT_FAILURE);
+		}
+		printf("Triage: stampo il messaggio\n");
+		printf("Triage: %s\n", msg.mtext);
+
+		// recupero chiave e messaggio da mtext
+
+
+		 char esempi[] = "sint omo;2345234";
+		 strcpy(msg.mtext,esempi);
+
+
+
+		 for (i = 0; msg.mtext[i] != ';'; i++){
+			 printf("<-%c->",msg.mtext[i]);
+			 key_paz[i] = msg.mtext[i];
+		 }
+		 key_paz[i] = '\0';
+
+		 int j;
+		 i++;
+		 for (j = 0; msg.mtext[i] != '\0'; i++,j++){
+			 printf("<-%c->",msg.mtext[i]);
+			 sintomo[j] = msg.mtext[i];
+		 }
+		 sintomo[j] = '\0';
+
+		 fclose(fp);
+
+		 printf("%s\n", key_paz);
+		 printf("%s\n", sintomo);
+
+		// scrivo sintomo e priorit� su FIFO
+	//}
+
+	return 0;
+}
+
+char* getSintomo(char* str){
+
+}
+
+int getPazientePid(char* str){
+
+}
+

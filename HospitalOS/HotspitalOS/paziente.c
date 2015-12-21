@@ -3,11 +3,11 @@
 #include <sys/types.h>
 #include <sys/msg.h>
 #include <sys/ipc.h>
-#include <sys/sem.h>
 #include <unistd.h>
 #include <time.h>
-
+#include "headerSem.h"
 #define N 50
+
 char* lettura_sintomo(FILE*file_sintomi, int sin);
 void conta_righe(FILE* file_sintomi, int* conta_righe);
 int getIdSemaforo();
@@ -48,11 +48,11 @@ int main(int argc, char** argv) {
 	semid = getIdSemaforo();
 	prenotaSemaforo(semid);
 
-	int msgid = msgget(IPC_PRIVATE, IPC_CREAT | 0666); // creo la coda di messaggi
+	/*int msgid = msgget(IPC_PRIVATE, IPC_CREAT | 0666); // creo la coda di messaggi
 	if (msgid == -1) {
 		perror("Paziente: errore creazione coda\n");
 		exit(EXIT_FAILURE);
-	}
+	}*/
 	key_t key = ftok("triage.c", '(');
 	if (key == -1) {
 		perror("Paziente: errore chiave da triage\n");
@@ -64,14 +64,14 @@ int main(int argc, char** argv) {
 		exit(EXIT_FAILURE);
 	}
 	msg.mytype = 1;
-	sprintf(msg.mtext, "%s; %d", sintomo, msgid); // scrive sulla mtext il sintomo e la chiave della coda del paziente
+	sprintf(msg.mtext, "%s;%d", sintomo,getpid()); // scrive sulla mtext il sintomo e la chiave della coda del paziente
 	if (msgsnd(triage_msgid, &msg, sizeof(msg), 0) == -1) { // scrive sull coda di messaggi
 		perror("Paziente: errore scrittura nella coda triage\n");
 		exit(EXIT_FAILURE);
 	}
 
 	//riliascia semaforo
-	rilasciaSemaforo(semid);
+	//rilasciaSemaforo(semid);
 
 	return 0;
 }
@@ -135,6 +135,10 @@ void prenotaSemaforo(int semid){
 		perror("Paziente: Errore sulla prenotazione del semaforo di ingresso");
 		exit(EXIT_FAILURE);
 	}
+
+	union semun arg;
+	arg.val = 0;
+	printf("Valore Semaforo: %d\n",semctl(semid,0,GETVAL,arg));
 }
 
 //rilascia il semaforo di ingresso

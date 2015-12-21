@@ -1,0 +1,128 @@
+#include <stdio.h>
+#include <unistd.h>
+#include <sys/wait.h>
+#include <stdlib.h>
+#include <string.h>
+
+#include <sys/types.h>
+#include <sys/msg.h>
+
+#define N 50
+
+typedef enum {false = 0,true = 1}boolean;
+
+/* STRUCT PER CODA DI MESSAGGI */
+struct my_msg {
+	long mtype;    // tipo di messaggio
+	char mtext[N];  // corpo messaggio
+};
+
+char* getSintomo(char* str);
+char* getPazientePid(char* str);
+char* getPriorita(char* sintomo,FILE* fp);
+
+/* FUNCTION */
+int main(int argc, char** argv) {
+
+	int i;
+	char* sintomo;
+	char* pid_paziente;
+	struct my_msg msg;
+
+	printf("Triage: creo coda di messaggi\n");
+
+	key_t key = ftok("triage.c", '(');   // creo chiave per coda di triage
+	if (key == -1) {
+		perror("Triage: errore creazione chiave\n");
+		exit(EXIT_FAILURE);
+	}
+	printf("Triage: la chiave per coda messaggi del triage e' %d\n", key);
+
+	int msgid = msgget(key, IPC_CREAT | 0666);   // creo coda di messaggi
+	if (msgid == -1) {
+		perror("Triage: errore creazione coda\n");
+		exit(EXIT_FAILURE);
+	}
+
+	FILE* fp = fopen("Sintomi.txt", "r");  // apro il file dei sintomi
+	if (fp == NULL) {
+		perror("Triage: errore apertura file\n");
+		exit(EXIT_FAILURE);
+	}
+
+	/* Ciclo infinito per associare priorita' a sintomo letto da coda di messaggi */
+	while (1) {
+		printf("Triage: leggo su coda di messaggi %d\n", msgid);
+		/* leggo il primo messaggio arrivato su coda */
+		if (msgrcv(msgid, &msg, sizeof(msg), 0, 0) == -1) { // va in errore se mtext > maxmsgsz
+			perror("Triage: errore ricezione messaggio\n");
+			exit(EXIT_FAILURE);
+		}
+		printf("Triage: stampo il messaggio\n");
+		printf("Triage: %s\n", msg.mtext);
+
+		// recupero pid e messaggio da mtext
+		 sintomo = getSintomo(msg.mtext);
+		 pid_paziente = getPazientePid(msg.mtext);
+
+
+		 printf("%s\n", sintomo);
+		 printf("%s\n", pid_paziente);
+		 printf("");
+
+		 free(sintomo);
+		 free(pid_paziente);
+
+		// scrivo sintomo e priorita' su FIFO
+	}
+
+	fclose(fp);
+
+	return 0;
+}
+
+char* getSintomo(char* str){
+	char* sintomo;
+	sintomo = (char*)malloc(sizeof(char)*N);
+	int i;
+	for (i = 0; str[i] != ';'; i++){
+		 sintomo[i] = str[i];
+	 }
+	 sintomo[i] = '\0';
+	 return sintomo;
+}
+
+char* getPazientePid(char* str){
+	int i;
+	char* pid;
+	pid = (char*)malloc(sizeof(char)*N);
+	for (i = 0; str[i] != ';'; i++);
+
+	 int j;
+	 i++;
+	 if(str[i] == ' '){
+		 i++;
+	 }
+	 for (j = 0; str[i] != '\0'; i++,j++){
+		 pid[j] = str[i];
+	 }
+	 pid[j] = '\0';
+	 return pid;
+}
+
+char* getPriorita(char* sintomo,FILE* fp){
+	boolean trov = false;
+	char* buf;
+	buf = malloc(sizeof(char)*N);
+	while(fgets(fp,(N-1),buf) != NULL && !trov){
+		if(strcmp(getSintomo(buf),sintomo) == 0){
+			strcpy(buf,getPazientePid(buf));
+			trov = true;
+		}
+	}
+	if(!trov){
+		strcpy(buf,"-1");
+	}
+	return buf;
+}
+
