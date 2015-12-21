@@ -48,11 +48,11 @@ int main(int argc, char** argv) {
 	semid = getIdSemaforo();
 	prenotaSemaforo(semid);
 
-	int msgid = msgget(IPC_PRIVATE, IPC_CREAT | 0666); // creo la coda di messaggi
+	/*int msgid = msgget(IPC_PRIVATE, IPC_CREAT | 0666); // creo la coda di messaggi
 	if (msgid == -1) {
 		perror("Paziente: errore creazione coda\n");
 		exit(EXIT_FAILURE);
-	}
+	}*/
 	key_t key = ftok("triage.c", '(');
 	if (key == -1) {
 		perror("Paziente: errore chiave da triage\n");
@@ -64,7 +64,7 @@ int main(int argc, char** argv) {
 		exit(EXIT_FAILURE);
 	}
 	msg.mytype = 1;
-	sprintf(msg.mtext, "%s; %d", sintomo, msgid); // scrive sulla mtext il sintomo e la chiave della coda del paziente
+	sprintf(msg.mtext, "%s;%d", sintomo,getpid()); // scrive sulla mtext il sintomo e la chiave della coda del paziente
 	if (msgsnd(triage_msgid, &msg, sizeof(msg), 0) == -1) { // scrive sull coda di messaggi
 		perror("Paziente: errore scrittura nella coda triage\n");
 		exit(EXIT_FAILURE);
@@ -98,7 +98,7 @@ char* lettura_sintomo(FILE*file_sintomi, int sin) {
 }
 
 void conta_righe(FILE* file_sintomi, int* size) {
-	int i = 1;
+	int i = 0;
 	char c;
 	while ((c = fgetc(file_sintomi)) != EOF) {
 		if (c == '\n')

@@ -69,10 +69,12 @@ int main(int argc, char** argv) {
 
 		 printf("%s\n", sintomo);
 		 printf("%s\n", pid_paziente);
-		 printf("\n<--- Priorita': %s --->\n",getPriorita(sintomo,fpSintomi));
+		 char* priorita = getPriorita(sintomo,fpSintomi);
+		 printf("\n<--- Priorita': %s --->\n",priorita);
 
 		 free(sintomo);
 		 free(pid_paziente);
+		 free(priorita);
 
 		// scrivo sintomo e priorita' su FIFO
 	}
@@ -124,6 +126,7 @@ char* getPriorita(char* sintomo,FILE* fp){
 	if(!trov){
 		strcpy(buf,"-1");
 	}
+	rewind(fp);
 	return buf;
 }
 
