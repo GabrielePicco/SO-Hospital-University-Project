@@ -92,7 +92,7 @@ char* lettura_sintomo(FILE*file_sintomi, int sin) {
 		sintomo[i] = c;
 	}
 	sintomo[i] = '\0';
-	fclose(file_sintomi);
+	rewind(file_sintomi);
 	return sintomo;
 
 }
