@@ -1,0 +1,40 @@
+/*
+ * reparto.c
+ *
+ *  Created on: 21 dic 2015
+ *      Author: davide
+ */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <sys/types.h>
+#include <sys/msg.h>
+#include <sys/ipc.h>
+#include <unistd.h>
+#define N 50
+
+/* STRUTTURA DELLA CODA DI MESSAGGI */
+struct my_msg {
+	long mytype; //type message
+	char mtext[N]; // corpo del messaggio
+};
+
+int main(int argc, char** argv) {
+	struct my_msg msg;
+	int msgid = msgget(IPC_PRIVATE, IPC_CREAT | 0666); // creo la coda di messaggi
+	if (msgid == -1) {
+		perror("Reparto: errore creazione coda\n");
+		exit(EXIT_FAILURE);
+	}
+	int priorita = 6;
+	msg.mytype = (10-priorita);
+	char* esempio = "Febbre Alta;123456789";
+	while (1){
+		if (msgsnd(msgid, &msg, sizeof(msg), 0) == -1) { // va in errore se mtext > maxmsgsz
+					perror("Reparto: errore scrittura messaggio\n");
+					exit(EXIT_FAILURE);
+				}
+	}
+
+	return 0;
+}

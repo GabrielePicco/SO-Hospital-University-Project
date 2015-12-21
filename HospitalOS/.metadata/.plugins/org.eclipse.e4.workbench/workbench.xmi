@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ASCII"?>
 <application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:advanced="http://www.eclipse.org/ui/2010/UIModel/application/ui/advanced" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_9UzrgKfgEeW0Pd7YVZ_UFw" elementId="org.eclipse.e4.legacy.ide.application" contributorURI="platform:/plugin/org.eclipse.platform" selectedElement="_9UzrgafgEeW0Pd7YVZ_UFw" bindingContexts="_9U052qfgEeW0Pd7YVZ_UFw">
-  <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&lt;workbench>&#xA;&lt;mruList>&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.ui.DefaultTextEditor&quot; name=&quot;Sintomi.txt&quot; tooltip=&quot;HotspitalOS/Sintomi.txt&quot;>&#xA;&lt;persistable path=&quot;/HotspitalOS/Sintomi.txt&quot;/>&#xA;&lt;/file>&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;processGenerator.c&quot; tooltip=&quot;HotspitalOS/processGenerator.c&quot;>&#xA;&lt;persistable path=&quot;/HotspitalOS/processGenerator.c&quot;/>&#xA;&lt;/file>&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;paziente.c&quot; tooltip=&quot;HotspitalOS/paziente.c&quot;>&#xA;&lt;persistable path=&quot;/HotspitalOS/paziente.c&quot;/>&#xA;&lt;/file>&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;triage.c&quot; tooltip=&quot;HotspitalOS/triage.c&quot;>&#xA;&lt;persistable path=&quot;/HotspitalOS/triage.c&quot;/>&#xA;&lt;/file>&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.ui.DefaultTextEditor&quot; name=&quot;triage.c~&quot; tooltip=&quot;HotspitalOS/triage.c~&quot;>&#xA;&lt;persistable path=&quot;/HotspitalOS/triage.c~&quot;/>&#xA;&lt;/file>&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.ui.DefaultTextEditor&quot; name=&quot;triage&quot; tooltip=&quot;HotspitalOS/triage&quot;>&#xA;&lt;persistable path=&quot;/HotspitalOS/triage&quot;/>&#xA;&lt;/file>&#xA;&lt;/mruList>&#xA;&lt;/workbench>"/>
+  <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&lt;workbench>&#xA;&lt;mruList>&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;paziente.c&quot; tooltip=&quot;HotspitalOS/paziente.c&quot;>&#xA;&lt;persistable path=&quot;/HotspitalOS/paziente.c&quot;/>&#xA;&lt;/file>&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;reparto.c&quot; tooltip=&quot;HotspitalOS/reparto.c&quot;>&#xA;&lt;persistable path=&quot;/HotspitalOS/reparto.c&quot;/>&#xA;&lt;/file>&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.ui.DefaultTextEditor&quot; name=&quot;Sintomi.txt&quot; tooltip=&quot;HotspitalOS/Sintomi.txt&quot;>&#xA;&lt;persistable path=&quot;/HotspitalOS/Sintomi.txt&quot;/>&#xA;&lt;/file>&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;processGenerator.c&quot; tooltip=&quot;HotspitalOS/processGenerator.c&quot;>&#xA;&lt;persistable path=&quot;/HotspitalOS/processGenerator.c&quot;/>&#xA;&lt;/file>&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;triage.c&quot; tooltip=&quot;HotspitalOS/triage.c&quot;>&#xA;&lt;persistable path=&quot;/HotspitalOS/triage.c&quot;/>&#xA;&lt;/file>&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.ui.DefaultTextEditor&quot; name=&quot;triage.c~&quot; tooltip=&quot;HotspitalOS/triage.c~&quot;>&#xA;&lt;persistable path=&quot;/HotspitalOS/triage.c~&quot;/>&#xA;&lt;/file>&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.ui.DefaultTextEditor&quot; name=&quot;triage&quot; tooltip=&quot;HotspitalOS/triage&quot;>&#xA;&lt;persistable path=&quot;/HotspitalOS/triage&quot;/>&#xA;&lt;/file>&#xA;&lt;/mruList>&#xA;&lt;/workbench>"/>
   <tags>activeSchemeId:org.eclipse.ui.defaultAcceleratorConfiguration</tags>
   <tags>ModelMigrationProcessor.001</tags>
   <children xsi:type="basic:TrimmedWindow" xmi:id="_9UzrgafgEeW0Pd7YVZ_UFw" elementId="IDEWindow" contributorURI="platform:/plugin/org.eclipse.platform" selectedElement="_9UzrgqfgEeW0Pd7YVZ_UFw" label="%trimmedwindow.label.eclipseSDK" x="0" y="0" width="1018" height="767">
@@ -139,6 +139,7 @@
             <children xsi:type="basic:PartSashContainer" xmi:id="_9UzrmqfgEeW0Pd7YVZ_UFw" containerData="2600" selectedElement="_9Uzrm6fgEeW0Pd7YVZ_UFw">
               <children xsi:type="basic:PartStack" xmi:id="_9Uzrm6fgEeW0Pd7YVZ_UFw" elementId="topLeft" containerData="5000" selectedElement="_9UzrnKfgEeW0Pd7YVZ_UFw">
                 <tags>org.eclipse.e4.primaryNavigationStack</tags>
+                <tags>noFocus</tags>
                 <children xsi:type="advanced:Placeholder" xmi:id="_9UzrnKfgEeW0Pd7YVZ_UFw" elementId="org.eclipse.ui.navigator.ProjectExplorer" ref="_9U0TA6fgEeW0Pd7YVZ_UFw"/>
                 <children xsi:type="advanced:Placeholder" xmi:id="_9UzrnafgEeW0Pd7YVZ_UFw" elementId="org.eclipse.ui.views.BookmarkView" toBeRendered="false" ref="_9U0TIafgEeW0Pd7YVZ_UFw"/>
                 <children xsi:type="advanced:Placeholder" xmi:id="_9UzrnqfgEeW0Pd7YVZ_UFw" elementId="org.eclipse.ui.views.ResourceNavigator" toBeRendered="false" ref="_9U0TIKfgEeW0Pd7YVZ_UFw"/>
@@ -157,9 +158,11 @@
                 </children>
                 <children xsi:type="advanced:Placeholder" xmi:id="_9Uzrp6fgEeW0Pd7YVZ_UFw" elementId="org.eclipse.ui.editorss" containerData="8400" ref="_9U0SpqfgEeW0Pd7YVZ_UFw"/>
               </children>
-              <children xsi:type="basic:PartStack" xmi:id="_9UzrqKfgEeW0Pd7YVZ_UFw" elementId="bottomRight" containerData="3400" selectedElement="_9UzrqafgEeW0Pd7YVZ_UFw">
+              <children xsi:type="basic:PartStack" xmi:id="_9UzrqKfgEeW0Pd7YVZ_UFw" elementId="bottomRight" containerData="3400" selectedElement="_Zv49gKgMEeWFu5jW-umjEA">
                 <tags>org.eclipse.e4.secondaryDataStack</tags>
+                <tags>General</tags>
                 <children xsi:type="advanced:Placeholder" xmi:id="_9UzrqafgEeW0Pd7YVZ_UFw" elementId="org.eclipse.ui.views.TaskList" ref="_9U0TJ6fgEeW0Pd7YVZ_UFw"/>
+                <children xsi:type="advanced:Placeholder" xmi:id="_Zv49gKgMEeWFu5jW-umjEA" elementId="org.eclipse.ui.console.ConsoleView" ref="_9U0TN6fgEeW0Pd7YVZ_UFw"/>
               </children>
             </children>
           </children>
@@ -189,18 +192,16 @@
       <tags>categoryTag:Help</tags>
     </sharedElements>
     <sharedElements xsi:type="advanced:Area" xmi:id="_9U0SpqfgEeW0Pd7YVZ_UFw" elementId="org.eclipse.ui.editorss" selectedElement="_9U0Sp6fgEeW0Pd7YVZ_UFw">
-      <children xsi:type="basic:PartStack" xmi:id="_9U0Sp6fgEeW0Pd7YVZ_UFw" elementId="org.eclipse.e4.primaryDataStack" selectedElement="_9U0SqKfgEeW0Pd7YVZ_UFw">
+      <children xsi:type="basic:PartStack" xmi:id="_9U0Sp6fgEeW0Pd7YVZ_UFw" elementId="org.eclipse.e4.primaryDataStack" selectedElement="_wMnDMKgBEeWFu5jW-umjEA">
         <tags>org.eclipse.e4.primaryDataStack</tags>
         <tags>EditorStack</tags>
         <tags>active</tags>
         <tags>noFocus</tags>
         <children xsi:type="basic:Part" xmi:id="_9U0SqKfgEeW0Pd7YVZ_UFw" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="triage.c" iconURI="platform:/plugin/org.eclipse.cdt.ui/icons/obj16/c_file_obj.gif" closeable="true">
-          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&lt;editor id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;triage.c&quot; partName=&quot;triage.c&quot; title=&quot;triage.c&quot; tooltip=&quot;HotspitalOS/triage.c&quot;>&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/HotspitalOS/triage.c&quot;/>&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;1813&quot; selectionTopPixel=&quot;167&quot;/>&#xA;&lt;/editor>"/>
+          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&lt;editor id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;triage.c&quot; partName=&quot;triage.c&quot; title=&quot;triage.c&quot; tooltip=&quot;HotspitalOS/triage.c&quot;>&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/HotspitalOS/triage.c&quot;/>&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;91&quot; selectionOffset=&quot;705&quot; selectionTopPixel=&quot;274&quot;/>&#xA;&lt;/editor>"/>
           <tags>Editor</tags>
           <tags>org.eclipse.cdt.ui.editor.CEditor</tags>
           <tags>removeOnHide</tags>
-          <tags>active</tags>
-          <tags>activeOnClose</tags>
           <menus xsi:type="menu:PopupMenu" xmi:id="_9U0SqafgEeW0Pd7YVZ_UFw" elementId="#CEditorContext">
             <tags>menuContribution:popup</tags>
             <tags>popup:#CEditorContext</tags>
@@ -219,7 +220,7 @@
           </menus>
         </children>
         <children xsi:type="basic:Part" xmi:id="_9U0S-6fgEeW0Pd7YVZ_UFw" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="paziente.c" iconURI="platform:/plugin/org.eclipse.cdt.ui/icons/obj16/c_file_obj.gif" closeable="true">
-          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&lt;editor id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;paziente.c&quot; partName=&quot;paziente.c&quot; title=&quot;paziente.c&quot; tooltip=&quot;HotspitalOS/paziente.c&quot;>&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/HotspitalOS/paziente.c&quot;/>&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;1996&quot; selectionTopPixel=&quot;978&quot;/>&#xA;&lt;/editor>"/>
+          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&lt;editor id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;paziente.c&quot; partName=&quot;paziente.c&quot; title=&quot;paziente.c&quot; tooltip=&quot;HotspitalOS/paziente.c&quot;>&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/HotspitalOS/paziente.c&quot;/>&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;15&quot; selectionOffset=&quot;1752&quot; selectionTopPixel=&quot;684&quot;/>&#xA;&lt;/editor>"/>
           <tags>Editor</tags>
           <tags>org.eclipse.cdt.ui.editor.CEditor</tags>
           <tags>removeOnHide</tags>
@@ -261,6 +262,14 @@
             <tags>menuContribution:popup</tags>
             <tags>popup:#OverviewRulerContext</tags>
           </menus>
+        </children>
+        <children xsi:type="basic:Part" xmi:id="_wMnDMKgBEeWFu5jW-umjEA" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="reparto.c" iconURI="platform:/plugin/org.eclipse.cdt.ui/icons/obj16/c_file_obj.gif" closeable="true">
+          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&lt;editor id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;reparto.c&quot; partName=&quot;reparto.c&quot; title=&quot;reparto.c&quot; tooltip=&quot;HotspitalOS/reparto.c&quot;>&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/HotspitalOS/reparto.c&quot;/>&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;1493&quot; selectionTopPixel=&quot;671&quot;/>&#xA;&lt;/editor>"/>
+          <tags>Editor</tags>
+          <tags>org.eclipse.cdt.ui.editor.CEditor</tags>
+          <tags>removeOnHide</tags>
+          <tags>active</tags>
+          <tags>activeOnClose</tags>
         </children>
       </children>
     </sharedElements>
@@ -319,7 +328,7 @@
       <toolbar xmi:id="_9U0TJqfgEeW0Pd7YVZ_UFw" elementId="org.eclipse.ui.views.ProblemView" visible="false"/>
     </sharedElements>
     <sharedElements xsi:type="basic:Part" xmi:id="_9U0TJ6fgEeW0Pd7YVZ_UFw" elementId="org.eclipse.ui.views.TaskList" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView" label="Tasks" iconURI="platform:/plugin/org.eclipse.ui.ide/icons/full/eview16/tasks_tsk.png" tooltip="" closeable="true">
-      <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&lt;view PRIMARY_SORT_FIELD=&quot;org.eclipse.ui.ide.completionField&quot; categoryGroup=&quot;none&quot; markerContentGenerator=&quot;org.eclipse.ui.ide.tasksGenerator&quot; partName=&quot;Tasks&quot;>&#xA;&lt;columnWidths org.eclipse.ui.ide.completionField=&quot;40&quot; org.eclipse.ui.ide.descriptionField=&quot;300&quot; org.eclipse.ui.ide.locationField=&quot;90&quot; org.eclipse.ui.ide.markerType=&quot;216&quot; org.eclipse.ui.ide.pathField=&quot;120&quot; org.eclipse.ui.ide.priorityField=&quot;30&quot; org.eclipse.ui.ide.resourceField=&quot;90&quot;/>&#xA;&lt;visible IMemento.internal.id=&quot;org.eclipse.ui.ide.completionField&quot;/>&#xA;&lt;visible IMemento.internal.id=&quot;org.eclipse.ui.ide.priorityField&quot;/>&#xA;&lt;visible IMemento.internal.id=&quot;org.eclipse.ui.ide.descriptionField&quot;/>&#xA;&lt;visible IMemento.internal.id=&quot;org.eclipse.ui.ide.resourceField&quot;/>&#xA;&lt;visible IMemento.internal.id=&quot;org.eclipse.ui.ide.pathField&quot;/>&#xA;&lt;visible IMemento.internal.id=&quot;org.eclipse.ui.ide.locationField&quot;/>&#xA;&lt;visible IMemento.internal.id=&quot;org.eclipse.ui.ide.markerType&quot;/>&#xA;&lt;/view>"/>
+      <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&lt;view PRIMARY_SORT_FIELD=&quot;org.eclipse.ui.ide.completionField&quot; categoryGroup=&quot;none&quot; markerContentGenerator=&quot;org.eclipse.ui.ide.tasksGenerator&quot; partName=&quot;Tasks&quot;>&#xA;&lt;columnWidths org.eclipse.ui.ide.completionField=&quot;0&quot; org.eclipse.ui.ide.descriptionField=&quot;0&quot; org.eclipse.ui.ide.locationField=&quot;0&quot; org.eclipse.ui.ide.markerType=&quot;0&quot; org.eclipse.ui.ide.pathField=&quot;0&quot; org.eclipse.ui.ide.priorityField=&quot;0&quot; org.eclipse.ui.ide.resourceField=&quot;0&quot;/>&#xA;&lt;visible IMemento.internal.id=&quot;org.eclipse.ui.ide.completionField&quot;/>&#xA;&lt;visible IMemento.internal.id=&quot;org.eclipse.ui.ide.priorityField&quot;/>&#xA;&lt;visible IMemento.internal.id=&quot;org.eclipse.ui.ide.descriptionField&quot;/>&#xA;&lt;visible IMemento.internal.id=&quot;org.eclipse.ui.ide.resourceField&quot;/>&#xA;&lt;visible IMemento.internal.id=&quot;org.eclipse.ui.ide.pathField&quot;/>&#xA;&lt;visible IMemento.internal.id=&quot;org.eclipse.ui.ide.locationField&quot;/>&#xA;&lt;visible IMemento.internal.id=&quot;org.eclipse.ui.ide.markerType&quot;/>&#xA;&lt;/view>"/>
       <tags>View</tags>
       <tags>categoryTag:General</tags>
       <menus xmi:id="_9U0TKKfgEeW0Pd7YVZ_UFw" elementId="org.eclipse.ui.views.TaskList">
@@ -331,10 +340,10 @@
         <tags>popup:org.eclipse.ui.views.TaskList</tags>
         <tags>popup:org.eclipse.ui.ide.MarkersView</tags>
       </menus>
-      <toolbar xmi:id="_9U0TNKfgEeW0Pd7YVZ_UFw" elementId="org.eclipse.ui.views.TaskList"/>
+      <toolbar xmi:id="_9U0TNKfgEeW0Pd7YVZ_UFw" elementId="org.eclipse.ui.views.TaskList" visible="false"/>
     </sharedElements>
     <sharedElements xsi:type="basic:Part" xmi:id="_9U0TN6fgEeW0Pd7YVZ_UFw" elementId="org.eclipse.ui.console.ConsoleView" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView" label="Console" iconURI="platform:/plugin/org.eclipse.ui.console/icons/full/cview16/console_view.png" tooltip="" closeable="true">
-      <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;view/>"/>
+      <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&lt;view/>"/>
       <tags>View</tags>
       <tags>categoryTag:General</tags>
       <menus xmi:id="_9U0TOKfgEeW0Pd7YVZ_UFw" elementId="org.eclipse.ui.console.ConsoleView">
@@ -412,7 +421,7 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_9U0TYafgEeW0Pd7YVZ_UFw" elementId="org.eclipse.ui.workbench.file">
         <tags>Draggable</tags>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_SLLdcKfhEeWRrdAdT3FsRw" elementId="print" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.png" tooltip="Print" command="_9U2JpKfgEeW0Pd7YVZ_UFw"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_oYPH8KgBEeWFu5jW-umjEA" elementId="print" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.png" tooltip="Print" command="_9U2JpKfgEeW0Pd7YVZ_UFw"/>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_9U0TcafgEeW0Pd7YVZ_UFw" elementId="additions" toBeRendered="false">
         <tags>toolbarSeparator</tags>
@@ -436,7 +445,7 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_9U0TuafgEeW0Pd7YVZ_UFw" elementId="org.eclipse.ui.workbench.navigate">
         <tags>Draggable</tags>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_SLRkEKfhEeWRrdAdT3FsRw" elementId="org.eclipse.ui.window.pinEditor" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.png" tooltip="Pin Editor" type="Check" command="_9U2H1qfgEeW0Pd7YVZ_UFw"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_oYQWE6gBEeWFu5jW-umjEA" elementId="org.eclipse.ui.window.pinEditor" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.png" tooltip="Pin Editor" type="Check" command="_9U2H1qfgEeW0Pd7YVZ_UFw"/>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_9U0TxKfgEeW0Pd7YVZ_UFw" elementId="group.editor" toBeRendered="false">
         <tags>toolbarSeparator</tags>

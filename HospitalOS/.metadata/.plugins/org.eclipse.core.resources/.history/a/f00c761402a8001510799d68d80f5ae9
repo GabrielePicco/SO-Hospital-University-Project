@@ -25,6 +25,7 @@ struct my_msg {
  */
 int main(int argc, char** argv) {
 	struct my_msg msg;
+
 	int semid;
 
 	FILE*file_sintomi; 	//Apertura file sintomi

@@ -67,3 +67,63 @@ gcc -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"paziente.d" -MT"paziente.o"
                      ^
 compilation terminated.
 make: *** [paziente.o] Error 1
+18:58:12 **** Build of configuration Debug for project HotspitalOS ****
+make all 
+Building file: ../.metadata/.plugins/org.eclipse.cdt.make.core/specs.c
+Invoking: GCC C Compiler
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF".metadata/.plugins/org.eclipse.cdt.make.core/specs.d" -MT".metadata/.plugins/org.eclipse.cdt.make.core/specs.o" -o ".metadata/.plugins/org.eclipse.cdt.make.core/specs.o" "../.metadata/.plugins/org.eclipse.cdt.make.core/specs.c"
+Finished building: ../.metadata/.plugins/org.eclipse.cdt.make.core/specs.c
+ 
+Building file: ../paziente.c
+Invoking: GCC C Compiler
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"paziente.d" -MT"paziente.o" -o "paziente.o" "../paziente.c"
+Finished building: ../paziente.c
+ 
+Building file: ../processGenerator.c
+Invoking: GCC C Compiler
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"processGenerator.d" -MT"processGenerator.o" -o "processGenerator.o" "../processGenerator.c"
+Finished building: ../processGenerator.c
+ 
+Building file: ../reparto.c
+Invoking: GCC C Compiler
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"reparto.d" -MT"reparto.o" -o "reparto.o" "../reparto.c"
+../reparto.c: In function ‘split_str’:
+../reparto.c:66:4: warning: implicit declaration of function ‘strcpy’ [-Wimplicit-function-declaration]
+    strcpy(priorita[0],str[i+1]);
+    ^
+../reparto.c:66:4: warning: incompatible implicit declaration of built-in function ‘strcpy’ [enabled by default]
+../reparto.c:66:4: warning: passing argument 1 of ‘strcpy’ makes pointer from integer without a cast [enabled by default]
+../reparto.c:66:4: note: expected ‘char *’ but argument is of type ‘char’
+../reparto.c:66:4: warning: passing argument 2 of ‘strcpy’ makes pointer from integer without a cast [enabled by default]
+../reparto.c:66:4: note: expected ‘const char *’ but argument is of type ‘char’
+../reparto.c:68:5: warning: passing argument 1 of ‘strcpy’ makes pointer from integer without a cast [enabled by default]
+     strcpy(priorita[1],str[i+2]);
+     ^
+../reparto.c:68:5: note: expected ‘char *’ but argument is of type ‘char’
+../reparto.c:68:5: warning: passing argument 2 of ‘strcpy’ makes pointer from integer without a cast [enabled by default]
+../reparto.c:68:5: note: expected ‘const char *’ but argument is of type ‘char’
+Finished building: ../reparto.c
+ 
+Building file: ../triage.c
+Invoking: GCC C Compiler
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"triage.d" -MT"triage.o" -o "triage.o" "../triage.c"
+../triage.c: In function ‘main’:
+../triage.c:27:6: warning: unused variable ‘i’ [-Wunused-variable]
+  int i;
+      ^
+Finished building: ../triage.c
+ 
+Building target: HotspitalOS
+Invoking: GCC C Linker
+gcc  -o "HotspitalOS"  ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.o  ./paziente.o ./processGenerator.o ./reparto.o ./triage.o   
+./processGenerator.o: nella funzione "main":
+/media/sf_SO-project/HospitalOS/HotspitalOS/Debug/../processGenerator.c:19: definizione multipla di "main"
+./paziente.o:/media/sf_SO-project/HospitalOS/HotspitalOS/Debug/../paziente.c:26: definito qui per la prima volta
+./reparto.o: nella funzione "main":
+/media/sf_SO-project/HospitalOS/HotspitalOS/Debug/../reparto.c:26: definizione multipla di "main"
+./paziente.o:/media/sf_SO-project/HospitalOS/HotspitalOS/Debug/../paziente.c:26: definito qui per la prima volta
+./triage.o: nella funzione "main":
+/media/sf_SO-project/HospitalOS/HotspitalOS/Debug/../triage.c:25: definizione multipla di "main"
+./paziente.o:/media/sf_SO-project/HospitalOS/HotspitalOS/Debug/../paziente.c:26: definito qui per la prima volta
+collect2: error: ld returned 1 exit status
+make: *** [HotspitalOS] Errore 1
