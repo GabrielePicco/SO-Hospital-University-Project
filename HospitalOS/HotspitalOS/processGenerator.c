@@ -71,7 +71,7 @@ int creaSemPazienti(){
 		perror("Errore inizializzazzione semaforo");
 		exit(EXIT_FAILURE);
 	}
-	printf("\n<--- Semaforo di controllo degli ingressi all'ospedale crearo e numero massimo dei pazienti in ingresso impostato a %d--->\n",numPazienti);
+	printf("\n\n<--- Semaforo di controllo degli ingressi all'ospedale crearo e numero massimo dei pazienti in ingresso impostato a %d--->\n\n",numPazienti);
 	return semid;
 }
 
@@ -97,7 +97,7 @@ int getNumMaxPazienti(){
 
 void avviaTriage(){
 	pid_t pid = fork();
-	if(pid == 0){ /* dopo la fork controllo se sono il filgio e avvio il processo triage*/
+	if(pid == 0){ /* dopo la fork controllo se sono il figlio e avvio il processo triage*/
 		char *argv[] = {"./triage" , NULL }; // Il primo elemento (argv[0]) deve contenere il nome del programma da invocare.
 		execv("triage",argv);
 		perror("\n<--- errore nella exve del triage --->\n"); // la execve non ritorna, se lo fa è un errore

@@ -3,7 +3,8 @@
 #include <sys/wait.h>
 #include <stdlib.h>
 #include <string.h>
-
+#include<fcntl.h>
+#include<sys/stat.h>
 #include <sys/types.h>
 #include <sys/msg.h>
 
@@ -20,14 +21,24 @@ struct my_msg {
 char* getSintomo(char* str);
 char* getPazientePid(char* str);
 char* getPriorita(char* sintomo,FILE* fp);
+int getNumReparti();
+void creaReparti(int num);
+char* intToString(int num);
+int* creaFIFOReparti(int numReparti);
 
 /* FUNCTION */
 int main(int argc, char** argv) {
 
-	int i;
+	int i,numReparti;
 	char* sintomo;
 	char* pid_paziente;
 	struct my_msg msg;
+
+	numReparti = getNumReparti();
+	printf("\nNumero reparti: %d\n",numReparti);
+	int* keyFIFO = creaFIFOReparti(numReparti);
+	creaReparti(numReparti);
+
 
 	printf("Triage: creo coda di messaggi\n");
 
@@ -128,5 +139,55 @@ char* getPriorita(char* sintomo,FILE* fp){
 	}
 	rewind(fp);
 	return buf;
+}
+
+int getNumReparti(){
+	int reparti = 0;
+	FILE* fconf;
+	fconf = fopen("config.ini","r");
+	while(getc(fconf)!='\n');
+	fscanf(fconf,"Numero Reparti = %d;",&reparti);
+	fclose(fconf);
+	return reparti;
+}
+
+void creaReparti(int num){
+	pid_t pid;
+	int i;
+	for(i=0;i < num; i++){
+		pid = fork();
+		if(pid == 0){ /* dopo la fork controllo se sono il figlio e avvio il processo triage*/
+			//converto
+			char *argv[] = {"./reparto" ,intToString(i), NULL }; // Il primo elemento (argv[0]) deve contenere il nome del programma da invocare.
+			execv("reparto",argv);
+			perror("\n<--- errore nella exve del reparto --->\n"); // la execve non ritorna, se lo fa è un errore
+			exit(EXIT_FAILURE);
+		}
+	}
+}
+
+char* intToString(int num){
+	char* snum;
+	snum = (char*)malloc(sizeof(char)*3);
+	sprintf(snum, "%d",num);
+	return snum;
+}
+
+int* creaFIFOReparti(int num){
+	int* key = (int*)malloc(sizeof(int)*num);
+	int i;
+	int fd;
+	for(i=0;i < num; i++){
+		char name[N];
+		strcpy(name,"fifoReparto");
+		strcat(name,intToString(i));
+		if(mkfifo("fifo",0666) == -1){
+			perror("Triage: errore creazione FIFO\n");
+			exit(EXIT_FAILURE);
+		}
+		printf("\n<--- Creata %s --->\n",name);
+		key[i] = open(name,O_WRONLY);
+	}
+	return key;
 }
 
