@@ -3,10 +3,12 @@
 #include <sys/wait.h>
 #include <stdlib.h>
 #include <string.h>
-#include<fcntl.h>
+#include <fcntl.h>
 #include<sys/stat.h>
 #include <sys/types.h>
 #include <sys/msg.h>
+#include "headerSem.h"
+#include <errno.h>
 
 #define N 50
 
@@ -25,6 +27,11 @@ int getNumReparti();
 void creaReparti(int num);
 char* intToString(int num);
 int* creaFIFOReparti(int numReparti);
+int getIdSemTriagePaziente();
+void releaseSemaforoTriagePazienti(int semid);
+void terminazione();
+
+boolean esc = false;
 
 /* FUNCTION */
 int main(int argc, char** argv) {
@@ -32,28 +39,33 @@ int main(int argc, char** argv) {
 	int i,numReparti;
 	char* sintomo;
 	char* pid_paziente;
+	char* priorita;
 	struct my_msg msg;
+	char* BUFFER;
+
+	signal(SIGQUIT, terminazione);
+
+	int semid = getIdSemTriagePaziente();
+
+	BUFFER = (char*)malloc(sizeof(char)*N);
 
 	numReparti = getNumReparti();
-	printf("\nNumero reparti: %d\n",numReparti);
-	int* keyFIFO = creaFIFOReparti(numReparti);
 	creaReparti(numReparti);
-
-
-	printf("Triage: creo coda di messaggi\n");
+	int* keyFIFO = creaFIFOReparti(numReparti);
 
 	key_t key = ftok("triage.c", '(');   // creo chiave per coda di triage
 	if (key == -1) {
 		perror("Triage: errore creazione chiave\n");
 		exit(EXIT_FAILURE);
 	}
-	printf("Triage: la chiave per coda messaggi del triage e' %d\n", key);
 
 	int msgid = msgget(key, IPC_CREAT | 0666);   // creo coda di messaggi
 	if (msgid == -1) {
 		perror("Triage: errore creazione coda\n");
 		exit(EXIT_FAILURE);
 	}
+
+	releaseSemaforoTriagePazienti(semid); // subito dopo creato coda rilasciamo semaforo abilitiamo pazienti
 
 	FILE* fpSintomi = fopen("Sintomi.txt", "r");  // apro il file dei sintomi
 	if (fpSintomi  == NULL) {
@@ -62,37 +74,66 @@ int main(int argc, char** argv) {
 	}
 
 	/* Ciclo infinito per associare priorita' a sintomo letto da coda di messaggi */
-	while (1) {
-		printf("Triage: leggo su coda di messaggi %d\n", msgid);
+	while (esc == false) {
 		/* leggo il primo messaggio arrivato su coda */
 		if (msgrcv(msgid, &msg, sizeof(msg), 0, 0) == -1) { // va in errore se mtext > maxmsgsz
-			perror("Triage: errore ricezione messaggio\n");
-			exit(EXIT_FAILURE);
+			if(errno != EINTR){ // se e' in attesa di messaggi e il segnale SIGALARM la interrompe non va in errore
+				perror("Triage: errore ricezione messaggio\n");
+				exit(EXIT_FAILURE);
+			}
 		}
-		printf("Triage: stampo il messaggio\n");
-		printf("Triage: %s\n", msg.mtext);
+
+		if(errno != EINTR){
+			printf("\n<-- Triage: Stampo messaggio: %s -->\n", msg.mtext);
+			// recupero pid e messaggio da mtext
+			 sintomo = getSintomo(msg.mtext);
+			 pid_paziente = getPazientePid(msg.mtext);
+			 priorita = getPriorita(sintomo,fpSintomi);
+
+			 sprintf(BUFFER,"%s;%s;%s",sintomo,pid_paziente,priorita);
 
 
-		// recupero pid e messaggio da mtext
-		 sintomo = getSintomo(msg.mtext);
-		 pid_paziente = getPazientePid(msg.mtext);
+			 if(write(keyFIFO[atoi(pid_paziente)%numReparti],BUFFER,N) == -1){
+				perror("Triage: errore scrittura fifo reparto\n");
+				exit(EXIT_FAILURE);
+			 }
 
+			 free(sintomo);
+			 free(pid_paziente);
+			 free(priorita);
 
-		 printf("%s\n", sintomo);
-		 printf("%s\n", pid_paziente);
-		 char* priorita = getPriorita(sintomo,fpSintomi);
-		 printf("\n<--- Priorita': %s --->\n",priorita);
+			 //printf("BUFFER RISULTATO: %s , in reparto: %d\n\n", BUFFER,atoi(pid_paziente)%numReparti);
+		}
+	}
+	
+	int k;
+	char* snum;
+	for(k=0;k < numReparti; k++){
+		char* name = (char*)malloc(sizeof(char)*N);
+		strcpy(name,"fifoReparto");
+		snum = intToString(k);
+		strcat(name,snum);
+		if(unlink(name) == -1){
+			printf("fifo name: %s",name);
+			perror("Fifo non può essere eliminata");
+		}
+		free(snum);
+		free(name);
+	}
+  	free(BUFFER);
+  	free(keyFIFO);
 
-		 free(sintomo);
-		 free(pid_paziente);
-		 free(priorita);
+  	fclose(fpSintomi);
 
-		// scrivo sintomo e priorita' su FIFO
+  	//elimina coda messaggi
+  	if (msgctl(msgid, IPC_RMID, NULL) == -1) {
+		fprintf(stderr, "Coda messaggi non può essere elminata.\n");
+		exit(EXIT_FAILURE);
 	}
 
-	fclose(fpSintomi);
+	//printf("\n## Triage: fifo e strutture eliminate ##\n");
 
-	return 0;
+	return EXIT_SUCCESS;
 }
 
 char* getSintomo(char* str){
@@ -156,13 +197,14 @@ void creaReparti(int num){
 	int i;
 	for(i=0;i < num; i++){
 		pid = fork();
-		if(pid == 0){ /* dopo la fork controllo se sono il figlio e avvio il processo triage*/
+		if(pid == 0){ /* dopo la fork controllo se sono il figlio e avvio il processo reparto*/		printf("CReazione reparto: %d",(i+1));
 			//converto
 			char *argv[] = {"./reparto" ,intToString(i), NULL }; // Il primo elemento (argv[0]) deve contenere il nome del programma da invocare.
 			execv("reparto",argv);
 			perror("\n<--- errore nella exve del reparto --->\n"); // la execve non ritorna, se lo fa è un errore
 			exit(EXIT_FAILURE);
 		}
+		printf("\n<-- Creato reparto %d -->\n",i);
 	}
 }
 
@@ -176,18 +218,54 @@ char* intToString(int num){
 int* creaFIFOReparti(int num){
 	int* key = (int*)malloc(sizeof(int)*num);
 	int i;
-	int fd;
+	char* snum;
 	for(i=0;i < num; i++){
-		char name[N];
+		char* name = (char*)malloc(sizeof(char)*N);
 		strcpy(name,"fifoReparto");
-		strcat(name,intToString(i));
-		if(mkfifo("fifo",0666) == -1){
-			perror("Triage: errore creazione FIFO\n");
+		snum = intToString(i);
+		strcat(name,snum);
+		mkfifo(name,0666);
+		key[i] = open(name,O_WRONLY); 
+		if(key[i] == -1){
+			perror("Triage: errore apertura FIFO\n");
 			exit(EXIT_FAILURE);
 		}
+		free(snum);
+		free(name);
 		printf("\n<--- Creata %s --->\n",name);
-		key[i] = open(name,O_WRONLY);
 	}
 	return key;
+}
+
+int getIdSemTriagePaziente(){
+	key_t key;
+	int semid;
+	//Genero la chiave per il semaforo
+	if((key = ftok("triage.c",'+')) == -1){
+		perror("Errore nella creazione delle chiave del semaforo sincronizzazione con ftok");
+		exit(EXIT_FAILURE);
+	}
+
+	//Creo il semaforo
+	if((semid = semget(key,1,0666)) == -1){
+		perror("Errore nella creazione del semaforo sincronizzazzione");
+		exit(EXIT_FAILURE);
+	}
+	return semid;
+}
+
+void releaseSemaforoTriagePazienti(int semid){
+	struct sembuf sops;
+	sops.sem_num = 0;
+	sops.sem_op = 1;
+	sops.sem_flg = 0;
+	if(semop(semid, &sops, 1) == -1){
+		perror("Errore release semaforo sincronizzazzione");
+		exit(EXIT_FAILURE);
+	}
+}
+
+void terminazione(){
+	esc = true;
 }
 

@@ -5,14 +5,24 @@
 #include <sys/ipc.h>
 #include <unistd.h>
 #include <time.h>
+#include <signal.h>
 #include "headerSem.h"
+
 #define N 50
 
+typedef enum {
+	false = 0, true = 1
+} boolean;
+
 char* lettura_sintomo(FILE*file_sintomi, int sin);
-void conta_righe(FILE* file_sintomi, int* conta_righe);
+int conta_righe(FILE* file_sintomi);
 int getIdSemaforo();
 void prenotaSemaforo(int semid);
 void rilasciaSemaforo(int semid);
+void uscita();
+void terminazione();
+
+boolean esc = false;
 
 /* STRUTTURA DELLA CODA DI MESSAGGI */
 struct my_msg {
@@ -27,6 +37,9 @@ int main(int argc, char** argv) {
 	struct my_msg msg;
 	int semid;
 
+	signal(SIGQUIT, terminazione);
+	signal(SIGUSR1, uscita);  // gestisce SIGUSR1 liberando il semaforo e deallocandosi
+
 	FILE*file_sintomi; 	//Apertura file sintomi
 	file_sintomi = fopen("Sintomi.txt", "r");
 	if (file_sintomi == NULL) {
@@ -34,18 +47,19 @@ int main(int argc, char** argv) {
 		exit(1);
 	}
 	int righe_file = 0;
-	conta_righe(file_sintomi, &righe_file);
+	righe_file = conta_righe(file_sintomi);
 	rewind(file_sintomi);
 	srand(time(NULL)); //funzione di randomizzazione
 	int sin = rand() % righe_file; //Generazione di un numero random per la scelta del sintomo
-	printf("Sintomo scelto: %d\n", sin);
-	char* sintomo;
-	sintomo = lettura_sintomo(file_sintomi, sin);
-	printf("Il sintomo %d corrisponde al sintomo %s\n", sin, sintomo);
 
 	//Accesso al semaforo
 	semid = getIdSemaforo();
 	prenotaSemaforo(semid);
+
+	char* sintomo;
+	sintomo = lettura_sintomo(file_sintomi, sin);
+
+	printf("\n<-- Paziente (%d): sintomo %d, corrispondente a %s -->\n",getpid(), sin, sintomo);
 
 	/*int msgid = msgget(IPC_PRIVATE, IPC_CREAT | 0666); // creo la coda di messaggi
 	if (msgid == -1) {
@@ -69,10 +83,23 @@ int main(int argc, char** argv) {
 		exit(EXIT_FAILURE);
 	}
 
-	//riliascia semaforo
-	//rilasciaSemaforo(semid);
+	while(esc == false); // Paziente rimane nell'ospedale finche non viene curato
 
-	return 0;
+	free(sintomo);
+
+	return EXIT_SUCCESS;
+}
+
+void terminazione(){
+	esc = true;
+}
+
+void uscita(){
+	if(esc == false){
+		printf("\n\n     |||  Uscita paziente %d  |||  \n\n",getpid());
+		esc = true;
+		rilasciaSemaforo(getIdSemaforo());
+	}
 }
 
 /* lettura_sintomo prende come parametri: un puntatore a FILE che e' indirizzato ad un file aperto
@@ -96,14 +123,14 @@ char* lettura_sintomo(FILE*file_sintomi, int sin) {
 
 }
 
-void conta_righe(FILE* file_sintomi, int* size) {
-	int i = 1;
+int conta_righe(FILE* file_sintomi) {
+	int i = 0;
 	char c;
 	while ((c = fgetc(file_sintomi)) != EOF) {
 		if (c == '\n')
 			i++;
 	}
-	*size = i;
+	return i;
 }
 
 //Restituisce l'id del semaforo di ingresso creato da processGenerator.c
@@ -118,36 +145,46 @@ int getIdSemaforo(){
 
 	//Ottengo semaforo
 	if((semid = semget(key,1,0666)) == -1){
-		perror("Paziente: Errore nel trovare semaforo pazienti");
-		exit(EXIT_FAILURE);
+		if(esc == false){
+			perror("Paziente: Errore nel trovare semaforo pazienti");
+			exit(EXIT_FAILURE);
+		}
 	}
 	return semid;
 }
 
+
+
 //prenota il semaforo di ingresso
 void prenotaSemaforo(int semid){
-	struct sembuf sop;
-	sop.sem_num = 0; // specifica il primo semaforo nel set
-	sop.sem_op = -1; // decrementa di 1 il semaforo
-	sop.sem_flg = 0;
-	if(semop(semid,&sop,1) == -1){
-		perror("Paziente: Errore sulla prenotazione del semaforo di ingresso");
-		exit(EXIT_FAILURE);
-	}
+	if(esc == false){
+		struct sembuf sop;
+		sop.sem_num = 0; // specifica il primo semaforo nel set
+		sop.sem_op = -1; // decrementa di 1 il semaforo
+		sop.sem_flg = 0;
+		if(semop(semid,&sop,1) == -1){
+			perror("Paziente: Errore sulla prenotazione del semaforo di ingresso");
+			exit(EXIT_FAILURE);
+		}
 
-	union semun arg;
-	arg.val = 0;
-	printf("Valore Semaforo: %d\n",semctl(semid,0,GETVAL,arg));
+		printf("\nS: <-- Valore Semaforo pazienti (prenotazione): %d -->\n",semctl(semid,0,GETVAL,NULL));
+	}
 }
 
 //rilascia il semaforo di ingresso
 void rilasciaSemaforo(int semid){
-	struct sembuf sop;
-	sop.sem_num = 0; // specifica il primo semaforo nel set
-	sop.sem_op = 1; // incrementa di 1 il semaforo
-	sop.sem_flg = 0;
-	if(semop(semid,&sop,1) == -1){
-		perror("Paziente: Errore sulla prenotazione del semaforo di ingresso");
-		exit(EXIT_FAILURE);
+	if(esc == false){
+		struct sembuf sop;
+		sop.sem_num = 0; // specifica il primo semaforo nel set
+		sop.sem_op = 1; // incrementa di 1 il semaforo
+		sop.sem_flg = 0;
+		if(semop(semid,&sop,1) == -1){
+			if(esc == false){
+				perror("Paziente: Errore sul rilascio del semaforo di ingresso");
+				exit(EXIT_FAILURE);
+			}
+		}
+
+		printf("\nS: <-- Valore Semaforo pazienti (rilascio): %d -->\n",semctl(semid,0,GETVAL,NULL));
 	}
 }
