@@ -97,8 +97,8 @@ void terminazione(){
 void uscita(){
 	if(esc == false){
 		printf("\n\n     |||  Uscita paziente %d  |||  \n\n",getpid());
-		esc = true;
 		rilasciaSemaforo(getIdSemaforo());
+		esc = true;
 	}
 }
 
