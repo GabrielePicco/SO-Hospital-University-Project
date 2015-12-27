@@ -1,0 +1,21 @@
+#include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <time.h>
+#include <stdlib.h>
+#include <string.h>
+#include <fcntl.h>
+#include <errno.h>
+#include <signal.h>
+
+#include <sys/wait.h>
+#include <sys/ipc.h>
+#include<sys/stat.h>
+#include <sys/types.h>
+
+#define N 50
+
+
+typedef enum {
+	false = 0, true = 1
+} boolean;

@@ -1,0 +1,11 @@
+#include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <time.h>
+#include <sys/wait.h>
+#include <sys/ipc.h>
+#include <sys/types.h>
+
+typedef enum {
+	false = 0, true = 1
+} boolean;

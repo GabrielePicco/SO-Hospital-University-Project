@@ -1,37 +1,4 @@
-#include <stdio.h>
-#include <unistd.h>
-#include <sys/wait.h>
-#include <stdlib.h>
-#include <string.h>
-#include <fcntl.h>
-#include<sys/stat.h>
-#include <sys/types.h>
-#include <sys/msg.h>
-#include "headerSem.h"
-#include <errno.h>
-
-#define N 50
-
-typedef enum {false = 0,true = 1}boolean;
-
-/* STRUCT PER CODA DI MESSAGGI */
-struct my_msg {
-	long mtype;    // tipo di messaggio
-	char mtext[N];  // corpo messaggio
-};
-
-char* getSintomo(char* str);
-char* getPazientePid(char* str);
-char* getPriorita(char* sintomo,FILE* fp);
-int getNumReparti();
-void creaReparti(int num);
-char* intToString(int num);
-int* creaFIFOReparti(int numReparti);
-int getIdSemTriagePaziente();
-void releaseSemaforoTriagePazienti(int semid);
-void terminazione();
-
-boolean esc = false;
+#include "triage.h"
 
 /* FUNCTION */
 int main(int argc, char** argv) {

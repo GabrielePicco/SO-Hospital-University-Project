@@ -3,44 +3,7 @@
  * messaggi FIFO per y secondi. Eroga prestazione del paziente
  */
 
-#include <stdio.h>
-#include <unistd.h>
-#include <sys/wait.h>
-#include <stdlib.h>
-#include <string.h>
-#include <sys/ipc.h>
-#include <signal.h>
-#include <sys/types.h>
-#include <sys/msg.h>
-#include <errno.h>
-#include <time.h>
-
-#define N 50
-
-#define FIFOTIME 2
-#define PRIORTIME 2
-
-typedef enum {
-	false = 0, true = 1
-} boolean;
-
-/* STRUCT PER CODA DI MESSAGGI */
-struct my_msg {
-	long mtype;    // tipo di messaggio
-	char mtext[N];  // corpo messaggio
-};
-
-/* EXTERN VARIABLE */
-boolean fifo = false;   // variabile per coda di messaggi
-int sec = PRIORTIME;            // tempo per il prossimo SIGALRM
-
-/* PROTOTIPI */
-void setQuequeType();
-char* getSintomo(char* str);
-char* getPazientePid(char* str);
-void terminazione();
-
-boolean esc = false;
+#include "dottore.h"
 
 /* FUNCTION */
 int main(int argc, char** argv) {

@@ -1,30 +1,4 @@
-#include <stdio.h>
-#include <unistd.h>
-#include <sys/wait.h>
-#include <stdlib.h>
-#include <sys/ipc.h>
-#include <sys/sem.h>
-#include <time.h>
-#include <sys/types.h>
-#include "headerSem.h"
-
-typedef enum {
-	false = 0, true = 1
-} boolean;
-
-int creaSemPazienti();
-int avviaTriage();
-int getNumMaxPazienti();
-void rimuoviSemaforo(int semid);
-int initSemTriagePaziente();
-int getIdSemTriagePaziente();
-int sincronizzaTriage(int semid);
-int getTimerChiusura();
-void stopGeneration();
-void terminazione();
-
-boolean generaProcessi = true;
-boolean esc = false;
+#include "processGenerator.h"
 
 /**
  * Genera ogni x secondi un nuovo paziente (processo), dove x è

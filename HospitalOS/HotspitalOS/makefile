@@ -1,7 +1,7 @@
 app: paziente triage reparto dottore processGenerator.c
 	gcc -o app processGenerator.c
-paziente: paziente.c 
-	gcc -o paziente paziente.c
+paziente.o: paziente.c paziente.h
+	gcc -c paziente.c
 triage: triage.c
 	gcc -o triage triage.c
 reparto: reparto.c

@@ -5,38 +5,7 @@
  *      Author: davide
  */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <sys/types.h>
-#include <sys/msg.h>
-#include<fcntl.h>
-#include<sys/stat.h>
-#include<string.h>
-#include <sys/ipc.h>
-#include <unistd.h>
-#include <signal.h>
-
-#define N 50
-#define M 5
-#define CONTROL_TIME 2
-
-typedef enum {
-	false = 0, true = 1
-} boolean;
-
-/* STRUTTURA DELLA CODA DI MESSAGGI */
-struct my_msg {
-	long mytype; //type message
-	char mtext[N]; // corpo del messaggio
-};
-
-char* split_str(char* str, int* priorita);
-int getFIFOReparto(int num);
-char* intToString(int num);
-void avviaDottore(int num);
-void terminazione();
-
-boolean esc = false;
+#include "reparto.h"
 
 int main(int argc, char** argv) {
 	struct my_msg msg;
@@ -73,7 +42,7 @@ int main(int argc, char** argv) {
 			//printf("esempio e': %s\n", esempio);
 
 
-			msg.mytype = (11 - priorita);
+			msg.mtype = (11 - priorita);
 			strcpy(msg.mtext,BUFFER); // sostituire esempio con dati da FIFO
 			if (msgsnd(msgid, &msg, sizeof(msg), 0) == -1) { // va in errore se mtext > maxmsgsz
 				perror("Reparto: errore scrittura messaggio");

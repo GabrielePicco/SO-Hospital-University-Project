@@ -1,0 +1,172 @@
+#include "processGenerator.h"
+
+boolean generaProcessi = true;
+boolean esc = false;
+
+/**
+ * Genera ogni x secondi un nuovo paziente (processo), dove x è
+ * un numero casuale tra 0 e 2.
+ */
+int main(int argc,char** argv){
+	int waitTime = 2;
+	int timerChiusura;
+	pid_t pidGenerator;
+
+	pidGenerator = getpid();
+
+	timerChiusura = getTimerChiusura();
+	signal(SIGQUIT, terminazione);
+
+	signal(SIGALRM, stopGeneration);  // gestisce SIGALRM chiamando stopGeneration'
+	alarm(timerChiusura);   // dopo sec secondi manda segnale SIGALRM
+
+	int semidPaziente = creaSemPazienti();
+
+	int semidTriage = avviaTriage(); // restituisce l'id del semaforo per poter sincronizzare i processi triage - pazienti
+
+	sincronizzaTriage(semidTriage); // evita che i pazienti tentino di accedere alla coda di msg prima che sia creata
+
+
+	while(esc == false){ /* ciclo infinito per il processo generatore, termina con SIGQUIT */
+		if(generaProcessi){
+			fork();
+			if(pidGenerator == getpid()){ /* dopo la fork controllo se sono il padre o il filgio */
+				sleep(waitTime);
+				srand(time(NULL)); //funzione di randomizzazione
+				waitTime = (rand() % 4)+1; /* numero int casuale tra 1 e 5 */
+			}else{
+				char *argv[] = {"./paziente" , NULL }; // Il primo elemento (argv[0]) deve contenere il nome del programma da invocare.
+				execv("paziente",argv);
+				perror("\n<--- errore nella exve del paziente --->\n"); // la execve non ritorna, se lo fa è un errore
+				exit(EXIT_FAILURE);
+			}
+		}
+	}
+
+	rimuoviSemaforo(semidPaziente);
+	rimuoviSemaforo(semidTriage);
+	printf("\n\n\t#### Terminazione sistema e cancellazzione strutture ####\n\n");
+
+	return EXIT_SUCCESS;
+}
+
+/**
+ * Funzione che crea il semaforo per l'accesso all'ospedale dei pazienti
+ * vieni inizializzato con il valore contenuto del file config.ini
+ */
+int creaSemPazienti(){
+	key_t key;
+	union semun arg;
+	int semid;
+	int numPazienti;
+	numPazienti = getNumMaxPazienti();
+
+	//Genero la chiave per il semaforo
+	if((key = ftok("processGenerator.c",']')) == -1){
+		perror("Errore nella creazione delle chiave del semaforo pazienti con ftok");
+		exit(EXIT_FAILURE);
+	}
+
+	//Creo il semaforo
+	if((semid = semget(key,1,0666 | IPC_CREAT)) == 1){
+		perror("Errore nella creazione del semaforo pazienti");
+		exit(EXIT_FAILURE);
+	}
+
+	//Inizializzo il semaforo con il numero massimo di pazienti che possono
+	//accedere all'ospedale contemporanemante
+	arg.val = numPazienti;
+	if(semctl(semid,0,SETVAL,arg) == -1){
+		perror("Errore inizializzazzione semaforo");
+		exit(EXIT_FAILURE);
+	}
+	printf("\n\n<--- Semaforo di controllo degli ingressi all'ospedale crearo e numero massimo dei pazienti in ingresso impostato a %d--->\n\n",numPazienti);
+	return semid;
+}
+
+void rimuoviSemaforo(int semid){
+	if(semctl(semid,0,IPC_RMID,NULL) == -1){
+		perror("Errore eliminazione semaforo");
+		exit(EXIT_FAILURE);
+	}
+}
+
+/**
+ * Funzione che restituisce il numero massimo di pazienti che possono entrare
+ * nell'ospedale contemporaneamente prendendolo dal file config.ini
+ */
+int getNumMaxPazienti(){
+	int pazienti = 0;
+	FILE* fconf;
+	fconf = fopen("config.ini","r");
+	fscanf(fconf,"Numero Pazienti (Max) = %d;",&pazienti);
+	fclose(fconf);
+	return pazienti;
+}
+
+int getTimerChiusura(){
+	int timer = 0;
+	FILE* fconf;
+	fconf = fopen("config.ini","r");
+	while(getc(fconf)!='\n'); // salto due righe
+	while(getc(fconf)!='\n');
+	fscanf(fconf,"Tempo chiusura = %d;",&timer);
+	fclose(fconf);
+	return timer;
+}
+
+int avviaTriage(){
+	int semid = initSemTriagePaziente();
+	pid_t pid = fork();
+	if(pid == 0){ /* dopo la fork controllo se sono il figlio e avvio il processo triage*/
+		char *argv[] = {"./triage" , NULL }; // Il primo elemento (argv[0]) deve contenere il nome del programma da invocare.
+		execv("triage",argv);
+		perror("\n<--- errore nella exve del triage --->\n"); // la execve non ritorna, se lo fa è un errore
+		exit(EXIT_FAILURE);
+	}
+	return semid;
+}
+
+//semaforo binario paziente - triage, inizializza il semaforo a zero
+int initSemTriagePaziente() {
+   int semNum = 0;
+   int semId = getIdSemTriagePaziente();
+   union semun arg;
+   arg.val = 0;
+   semctl(semId, semNum, SETVAL, arg);
+   return semId;
+}
+
+int getIdSemTriagePaziente(){
+	key_t key;
+	int semid;
+	//Genero la chiave per il semaforo
+	if((key = ftok("triage.c",'+')) == -1){
+		perror("Errore nella creazione delle chiave del semaforo pazienti con ftok");
+		exit(EXIT_FAILURE);
+	}
+
+	//Creo il semaforo
+	if((semid = semget(key,1,0666 | IPC_CREAT)) == -1){
+		perror("Errore nella creazione del semaforo pazienti");
+		exit(EXIT_FAILURE);
+	}
+	return semid;
+}
+
+int sincronizzaTriage(int semid){
+	struct sembuf sops;
+	 sops.sem_num = 0;
+	 sops.sem_op = -1;
+	 sops.sem_flg = 0;
+
+	 return semop(semid, &sops, 1);
+}
+
+void stopGeneration(){
+	generaProcessi = false;
+}
+
+void terminazione(){
+	esc = true;
+}
