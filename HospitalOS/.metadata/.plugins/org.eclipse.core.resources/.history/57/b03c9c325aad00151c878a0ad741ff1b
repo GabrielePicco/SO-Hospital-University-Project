@@ -3,7 +3,7 @@
 /* FUNCTION */
 int main(int argc, char** argv) {
 
-	int numReparti;
+	int i,numReparti;
 	char* sintomo;
 	char* pid_paziente;
 	char* priorita;
