@@ -59,7 +59,7 @@ int main(int argc, char** argv) {
 			 sprintf(BUFFER,"%s;%s;%s",sintomo,pid_paziente,priorita);
 
 			 // scrivo su FIFO del reparto Sintomo, PID e priorita' del paziente
-			 if(write(keyFIFO[atoi(pid_paziente)%numReparti],BUFFER,N) == -1){
+			 if(write(keyFIFO[atoi(pid_paziente)%numReparti],BUFFER,SIZE) == -1){
 				perror("Triage: errore scrittura fifo reparto\n");
 				exit(EXIT_FAILURE);
 			 }
@@ -140,7 +140,7 @@ char* getPriorita(char* sintomo,FILE* fp){
 	boolean trov = false;
 	char* buf;
 	buf = (char*)malloc(sizeof(char)*SIZE);
-	while(!trov && fgets(buf,(N-1),fp) != NULL){
+	while(!trov && fgets(buf,(SIZE-1),fp) != NULL){
 		if(strcmp(getSintomo(buf),sintomo) == 0){
 			strcpy(buf,getPazientePid(buf));
 			trov = true;

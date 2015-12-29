@@ -8,5 +8,5 @@
 /* STRUCT PER CODA DI MESSAGGI */
 struct my_msg {
 	long mtype;    // tipo di messaggio
-	char mtext[N];  // corpo messaggio
+	char mtext[SIZE];  // corpo messaggio
 };

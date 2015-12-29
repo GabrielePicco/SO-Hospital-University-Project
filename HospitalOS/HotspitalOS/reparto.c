@@ -28,7 +28,7 @@ int main(int argc, char** argv) {
 	avviaDottore(numReparto);
 
 	while (esc == false) {
-		if(read(keyFIFO, BUFFER, N) > 0){
+		if(read(keyFIFO, BUFFER, SIZE) > 0){
 			BUFFER = split_str(BUFFER, &priorita);   // salvo in BUFFER Sintomo;PID
 
 			msg.mtype = (11 - priorita);
