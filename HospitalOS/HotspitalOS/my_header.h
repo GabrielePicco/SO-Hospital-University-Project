@@ -15,4 +15,4 @@ typedef enum {
 	false = 0, true = 1
 } boolean;
 
-#define N 50
+#define SIZE 50

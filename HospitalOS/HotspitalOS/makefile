@@ -1,4 +1,4 @@
-app: paziente triage reparto dottore processGenerator.c
+app: paziente triage reparto dottore processGenerator.c processGenerator.h headerSem.h my_header.h
 	gcc -o app processGenerator.c
 	gcc -Wall -o app processGenerator.c
 	gcc -pedantic -o app processGenerator.c

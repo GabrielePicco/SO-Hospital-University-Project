@@ -1,6 +1,6 @@
 #include "headerMsg.h"
 
-#define M 5
+#define PRIORSIZE 5
 #define CONTROL_TIME 2
 
 /* VARIABILI GLOBALI */

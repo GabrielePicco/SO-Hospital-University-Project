@@ -1,7 +1,7 @@
 #include "headerMsg.h"
 
 #define FIFOTIME 2
-#define PRIORTIME 2
+#define PRIORTIME 4
 
 /* VARIABILI GLOBALI */
 boolean fifo = false;    // variabile per coda di messaggi
