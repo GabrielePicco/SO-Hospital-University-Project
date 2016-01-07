@@ -10,7 +10,7 @@ int main(int argc, char** argv) {
 
 	signal(SIGQUIT, terminazione);
 	signal(SIGUSR1, uscita); // gestisce SIGUSR1 liberando il semaforo e deallocandosi. SIGUSR1 arriva
-							 // da dottore una volta che il paziente è curato
+							 // da dottore una volta che il paziente Ã¨ curato
 
 	FILE* file_sintomi; 	//Apertura file sintomi
 	file_sintomi = fopen("Sintomi.txt", "r");
@@ -77,7 +77,7 @@ void uscita() {
  * e un intero che contiene il numero della riga in cui si trova il sintomo da restituire in output
  */
 char* lettura_sintomo(FILE* file_sintomi, int sin) {
-	char* sintomo = (char*) malloc(sizeof(char));
+	char* sintomo = (char*) malloc(sizeof(char)*SIZE);
 	int i = 0;
 	char c;
 	while (i < sin) {  // cerco il sintomo
