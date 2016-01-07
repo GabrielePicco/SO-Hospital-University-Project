@@ -28,3 +28,5 @@ run:
 	./app
 file:
 	./app > log.txt
+both:
+	./app | tee log.txt
