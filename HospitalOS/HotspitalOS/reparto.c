@@ -39,6 +39,7 @@ int main(int argc, char** argv) {
 				exit(EXIT_FAILURE);
 			}
 			printf("\n°° Reparto %d: Accolgo il paziente (sintomo;PID): \"%s\" e lo inserisco in coda per essere ricevuto dal dottore°°\n",numReparto,BUFFER);
+			fflush(stdout);
 			free(BUFFER);
 		}
 		sleep(CONTROL_TIME); // Controlla la fifo ogni due secondi

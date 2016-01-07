@@ -33,6 +33,7 @@ int main(int argc, char** argv) {
 	char* sintomo = lettura_sintomo(file_sintomi, sin);
 	printf("\n<---- Sono il paziente appena entrato nell'ospedale, di PID (%d), con il sintomo \"%s\" ---->\n", getpid(),
 			sintomo);
+	fflush(stdout);
 
 	// Recupero chiave coda msg triage
 	key_t key = ftok("triage.c", '(');
@@ -67,6 +68,7 @@ void terminazione() {
 void uscita() {
 	if (esc == false) {
 		printf("\n\n\t\t |||  Uscita paziente %d ||| \n\n", getpid());
+		fflush(stdout);
 		rilasciaSemaforo(getIdSemaforo());
 		esc = true;
 	}
@@ -137,6 +139,7 @@ void prenotaSemaforo(int semid) {
 		}
 		printf("\n ----- Ingresso di un paziente nell'ospedale. \tI posti rimanenti sono: %d -----\n",
 				semctl(semid, 0, GETVAL, NULL));
+		fflush(stdout);
 	}
 }
 
@@ -155,6 +158,7 @@ void rilasciaSemaforo(int semid) {
 		}
 		printf("\n***** Un paziente e' stato curato e lascia l'ospedale. \tI posti liberi sono: %d *****\n",
 				semctl(semid, 0, GETVAL, NULL));
+		fflush(stdout);
 	}
 }
 

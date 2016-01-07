@@ -57,6 +57,7 @@ int main(int argc, char** argv) {
 			 priorita = getPriorita(sintomo,fpSintomi);
 
 			 printf("\n>- Triage: Accolgo il paziente(PID=%s) con il sintomo \"%s\" e gli associo la priorita': %s\n", pid_paziente,sintomo,priorita);
+			 fflush(stdout);
 
 			 sprintf(BUFFER,"%s;%s;%s",sintomo,pid_paziente,priorita);
 
@@ -209,6 +210,7 @@ int* creaFIFOReparti(int num){
 			exit(EXIT_FAILURE);
 		}
 		printf("\n<--- Creata %s --->\n",name);
+		fflush(stdout);
 		free(snum);
 		free(name);
 	}

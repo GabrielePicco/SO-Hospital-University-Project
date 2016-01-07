@@ -79,6 +79,7 @@ int main(int argc, char** argv) {
 				free(pidPaz);
 			}
 		}
+		fflush(stdout);
 	}
 
 	return EXIT_SUCCESS;

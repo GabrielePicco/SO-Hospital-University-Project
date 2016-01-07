@@ -44,6 +44,7 @@ int main(int argc, char** argv) {
 rimuoviSemaforo(semidPaziente);
 rimuoviSemaforo(semidTriage);
 printf("\n#### TERMINAZIONE SISTEMA E CANCELLAZIONE STRUTTURE ####\n");
+fflush(stdout);
 
 return EXIT_SUCCESS;
 }
@@ -81,6 +82,7 @@ if (semctl(semid, 0, SETVAL, arg) == -1) {
 }
 printf("\n<--- Semaforo di controllo degli ingressi all'ospedale creato e numero massimo dei pazienti in ingresso impostato a %d--->\n",
 		numPazienti);
+fflush(stdout);
 return semid;
 }
 
