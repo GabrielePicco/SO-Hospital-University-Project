@@ -177,6 +177,7 @@ return semop(semid, &sops, 1);
 
 void stopGeneration() {
 printf("\n\t\t****************************************\n\t\t* Ricevuto SIGALRM, blocco del sistema *\n\t\t****************************************\n");
+fflush(stdout);
 generaProcessi = false;
 }
 
