@@ -28,9 +28,9 @@ int main(int argc, char** argv) {
 		if (generaProcessi) {
 			fork();
 			if (pidGenerator == getpid()) { /* dopo la fork controllo se sono il padre o il filgio */
-				while((waitTime = sleep(waitTime) && esc == false) != 0); // se la sleep viene
+				while((waitTime = sleep(waitTime)) != 0); // se la sleep viene interrotta da un segnale riprende da dove aveva terminato fino ad arrivare a 0
 				srand(time(NULL)); //funzione di randomizzazione
-				waitTime = (rand() % 2) + 1; /* numero int casuale tra 1 e 4 */
+				waitTime = (rand() % 4) + 1; /* numero int casuale tra 1 e 5 */
 			} else {   // figlio
 				char *argv[] = { "./paziente", NULL }; // Il primo elemento (argv[0]) deve contenere il nome del processo da invocare.
 				execv("paziente", argv);   // passo l'esecuzione a paziente
@@ -174,11 +174,11 @@ return semop(semid, &sops, 1);
 }
 
 void stopGeneration() {
-printf("\n\t\t****************************************\n\t\t* Ricevuto SIGALRM, blocco del sistema *\n\t\t****************************************\n");
+printf("\n---- Ricevuto SIGALRM, blocco del sistema -----\n");
 generaProcessi = false;
 }
 
 void terminazione() {
-printf("\n----Ricevuto SIGQUIT, eliminazione strutture in corso ----\n");
+printf("\n---- Ricevuto SIGQUIT, eliminazione strutture in corso ----\n");
 esc = true;
 }

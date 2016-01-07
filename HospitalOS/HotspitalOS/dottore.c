@@ -6,10 +6,10 @@
 #include "dottore.h"
 
 int main(int argc, char** argv) {
-
 	struct my_msg msg;
 	char* sintomo;
 	char* pidPaz;
+	int tmpTime;
 
 	signal(SIGQUIT, terminazione);
 
@@ -46,8 +46,7 @@ int main(int argc, char** argv) {
 				}
 			}
 			if(msgRicevuto){
-			   printf("Dottore %d : ricevuto paziente in coda PRIORITA':\n",numDottore);
-			   printf("ricevuto messaggio: %s | priorita' paziente: %lu\n",msg.mtext,(11-msg.mtype));
+			  printf("\n<- Dottore %d : ricevuto paziente in coda ** PRIORITA' ** con priorità: * %lu *\n",numDottore,(11-msg.mtype));
 			}
 		} else {   // leggo su coda FIFO
 			msgRicevuto = true;
@@ -60,26 +59,25 @@ int main(int argc, char** argv) {
 				}
 			}
 			if(msgRicevuto){
-				printf("Dottore %d : ricevuto paziente in coda FIFO:\n",numDottore);
-				printf("ricevuto messaggio: %s | priorita' paziente: %lu\n",msg.mtext,(11-msg.mtype));
+				printf("\n<- Dottore %d : ricevuto paziente in coda ## FIFO ## con priorità: # %lu #\n",numDottore,(11-msg.mtype));
 			}
 		}
 		if(msgRicevuto){
 			sintomo = getSintomo(msg.mtext);   // recupero sintomo dal messaggio
 			pidPaz = getPazientePid(msg.mtext);   // recupero PID paziente dal messaggio
-
 			srand(time(NULL)); //funzione di randomizzazione
-			sleep((rand() % 4)+2);   // attendo tempo casuale per erogazione prestazione tra 2 e 5 secondi
-
-
-			printf("\n<---- Dottore %d: paziente con PID %s e sintomo %s curato ---->\n",numDottore, pidPaz,sintomo);
-			int pidPazNum = atoi(pidPaz);
-			if(kill(pidPazNum,SIGUSR1) == -1){   // invio messaggio SIGUSR1 a paziente
-				perror("Dottore: errore invio segnale SIGUSR1 a paziente\n");
-				exit(EXIT_FAILURE);
+			tmpTime = ((rand() % 4)+7);   // attendo tempo casuale per erogazione prestazione tra 2 e 5 secondi
+			while((tmpTime = sleep(tmpTime)) != 0 && esc == false); // se la sleep viene interrotta da un segnale riprende da dove aveva terminato fino ad arrivare a 0
+			if(esc == false){
+				printf("\n<---- Dottore %d: paziente con PID %s e sintomo %s curato ---->\n",numDottore, pidPaz,sintomo);
+				int pidPazNum = atoi(pidPaz);
+				if(kill(pidPazNum,SIGUSR1) == -1){   // invio messaggio SIGUSR1 a paziente
+					perror("Dottore: errore invio segnale SIGUSR1 a paziente\n");
+					exit(EXIT_FAILURE);
+				}
+				free(sintomo);
+				free(pidPaz);
 			}
-			free(sintomo);
-			free(pidPaz);
 		}
 	}
 
@@ -140,6 +138,5 @@ char* getPazientePid(char* str) {
 }
 
 void terminazione(){
-	printf("\n---- Ricevuto SIGQUIT, eliminazione strutture in corso ----\n");
 	esc = true;
 }

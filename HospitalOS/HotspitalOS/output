@@ -1,0 +1,130 @@
+
+ ----- Ingresso di un paziente nell'ospedale. 	I posti rimanenti sono: 9 -----
+
+<---- Sono il paziente appena entrato nell'ospedale, di PID (8390), con il sintomo "Svenimento" ---->
+
+
+		 |||  Uscita paziente 8390 ||| 
+
+
+***** Un paziente e' stato curato e lascia l'ospedale. 	I posti liberi sono: 5 *****
+
+ ----- Ingresso di un paziente nell'ospedale. 	I posti rimanenti sono: 7 -----
+
+<---- Sono il paziente appena entrato nell'ospedale, di PID (8393), con il sintomo "Dolori Articolari" ---->
+
+
+		 |||  Uscita paziente 8393 ||| 
+
+
+***** Un paziente e' stato curato e lascia l'ospedale. 	I posti liberi sono: 4 *****
+
+ ----- Ingresso di un paziente nell'ospedale. 	I posti rimanenti sono: 8 -----
+
+<---- Sono il paziente appena entrato nell'ospedale, di PID (8392), con il sintomo "Emicrania" ---->
+
+
+		 |||  Uscita paziente 8392 ||| 
+
+
+***** Un paziente e' stato curato e lascia l'ospedale. 	I posti liberi sono: 2 *****
+
+ ----- Ingresso di un paziente nell'ospedale. 	I posti rimanenti sono: 4 -----
+
+<---- Sono il paziente appena entrato nell'ospedale, di PID (8397), con il sintomo "Dolori Addominali" ---->
+
+
+		 |||  Uscita paziente 8397 ||| 
+
+
+***** Un paziente e' stato curato e lascia l'ospedale. 	I posti liberi sono: 1 *****
+
+ ----- Ingresso di un paziente nell'ospedale. 	I posti rimanenti sono: 6 -----
+
+<---- Sono il paziente appena entrato nell'ospedale, di PID (8394), con il sintomo "Soffocamento" ---->
+
+
+		 |||  Uscita paziente 8394 ||| 
+
+
+***** Un paziente e' stato curato e lascia l'ospedale. 	I posti liberi sono: 2 *****
+
+ ----- Ingresso di un paziente nell'ospedale. 	I posti rimanenti sono: 5 -----
+
+<---- Sono il paziente appena entrato nell'ospedale, di PID (8395), con il sintomo "Epistassi" ---->
+
+
+		 |||  Uscita paziente 8395 ||| 
+
+
+***** Un paziente e' stato curato e lascia l'ospedale. 	I posti liberi sono: 3 *****
+
+ ----- Ingresso di un paziente nell'ospedale. 	I posti rimanenti sono: 2 -----
+
+<---- Sono il paziente appena entrato nell'ospedale, di PID (8400), con il sintomo "Soffocamento" ---->
+
+
+		 |||  Uscita paziente 8400 ||| 
+
+
+***** Un paziente e' stato curato e lascia l'ospedale. 	I posti liberi sono: 4 *****
+
+ ----- Ingresso di un paziente nell'ospedale. 	I posti rimanenti sono: 3 -----
+
+<---- Sono il paziente appena entrato nell'ospedale, di PID (8399), con il sintomo "Dolori Addominali" ---->
+
+
+		 |||  Uscita paziente 8399 ||| 
+
+
+***** Un paziente e' stato curato e lascia l'ospedale. 	I posti liberi sono: 5 *****
+
+ ----- Ingresso di un paziente nell'ospedale. 	I posti rimanenti sono: 4 -----
+
+<---- Sono il paziente appena entrato nell'ospedale, di PID (8396), con il sintomo "Dolori Articolari" ---->
+
+
+		 |||  Uscita paziente 8396 ||| 
+
+
+***** Un paziente e' stato curato e lascia l'ospedale. 	I posti liberi sono: 6 *****
+
+ ----- Ingresso di un paziente nell'ospedale. 	I posti rimanenti sono: 0 -----
+
+<---- Sono il paziente appena entrato nell'ospedale, di PID (8403), con il sintomo "Soffocamento" ---->
+
+
+		 |||  Uscita paziente 8403 ||| 
+
+
+***** Un paziente e' stato curato e lascia l'ospedale. 	I posti liberi sono: 7 *****
+
+ ----- Ingresso di un paziente nell'ospedale. 	I posti rimanenti sono: 1 -----
+
+<---- Sono il paziente appena entrato nell'ospedale, di PID (8401), con il sintomo "Nausea" ---->
+
+
+		 |||  Uscita paziente 8401 ||| 
+
+
+***** Un paziente e' stato curato e lascia l'ospedale. 	I posti liberi sono: 8 *****
+
+ ----- Ingresso di un paziente nell'ospedale. 	I posti rimanenti sono: 3 -----
+
+<---- Sono il paziente appena entrato nell'ospedale, di PID (8398), con il sintomo "Frattura Arto" ---->
+
+
+		 |||  Uscita paziente 8398 ||| 
+
+
+***** Un paziente e' stato curato e lascia l'ospedale. 	I posti liberi sono: 9 *****
+
+ ----- Ingresso di un paziente nell'ospedale. 	I posti rimanenti sono: 1 -----
+
+<---- Sono il paziente appena entrato nell'ospedale, di PID (8402), con il sintomo "Febbre Alta" ---->
+
+
+		 |||  Uscita paziente 8402 ||| 
+
+
+***** Un paziente e' stato curato e lascia l'ospedale. 	I posti liberi sono: 10 *****

@@ -31,7 +31,7 @@ int main(int argc, char** argv) {
 	prenotaSemaforo(semid);
 
 	char* sintomo = lettura_sintomo(file_sintomi, sin);
-	printf("\n<---- Paziente (%d): sintomo %d, corrispondente a %s ---->\n", getpid(), sin,
+	printf("\n<---- Sono il paziente appena entrato nell'ospedale, di PID (%d), con il sintomo \"%s\" ---->\n", getpid(),
 			sintomo);
 
 	// Recupero chiave coda msg triage
@@ -53,23 +53,20 @@ int main(int argc, char** argv) {
 		perror("Paziente: errore scrittura nella coda triage\n");
 		exit(EXIT_FAILURE);
 	}
-
-	while (esc == false)
-		; // Paziente rimane nell'ospedale finche non viene curato
-
 	free(sintomo);
+
+	while (esc == false); // Paziente rimane nell'ospedale finche non viene curato
 
 	return EXIT_SUCCESS;
 }
 
 void terminazione() {
-	printf("\n---- Ricevuto SIGQUIT, eliminazione strutture in corso ----\n");
 	esc = true;
 }
 
 void uscita() {
 	if (esc == false) {
-		printf("\n |||  Uscita paziente %d ||| \n", getpid());
+		printf("\n\n\t\t |||  Uscita paziente %d ||| \n\n", getpid());
 		rilasciaSemaforo(getIdSemaforo());
 		esc = true;
 	}
@@ -138,7 +135,7 @@ void prenotaSemaforo(int semid) {
 			perror("Paziente: Errore sulla prenotazione del semaforo di ingresso");
 			exit(EXIT_FAILURE);
 		}
-		printf("\n ----- Entrato paziente. Valore attuale semaforo: %d -----\n",
+		printf("\n ----- Ingresso di un paziente nell'ospedale. \tI posti rimanenti sono: %d -----\n",
 				semctl(semid, 0, GETVAL, NULL));
 	}
 }
@@ -156,7 +153,7 @@ void rilasciaSemaforo(int semid) {
 				exit(EXIT_FAILURE);
 			}
 		}
-		printf("\n***** Rilasciato semaforo pazienti. Valore attuale: %d *****\n",
+		printf("\n***** Un paziente e' stato curato e lascia l'ospedale. \tI posti liberi sono: %d *****\n",
 				semctl(semid, 0, GETVAL, NULL));
 	}
 }

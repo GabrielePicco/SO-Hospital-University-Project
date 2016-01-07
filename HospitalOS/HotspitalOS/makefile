@@ -26,3 +26,5 @@ clean:
 	rm -f dottore
 run:
 	./app
+file:
+	./app > log.txt

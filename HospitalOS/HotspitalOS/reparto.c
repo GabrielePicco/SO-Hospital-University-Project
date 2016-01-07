@@ -38,7 +38,7 @@ int main(int argc, char** argv) {
 				perror("Reparto: errore scrittura messaggio");
 				exit(EXIT_FAILURE);
 			}
-			printf("Reparto %d: Messaggio %s scritto su coda di msg\n",numReparto,BUFFER);
+			printf("\n°° Reparto %d: Accolgo il paziente (sintomo;PID): \"%s\" e lo inserisco in coda per essere ricevuto dal dottore°°\n",numReparto,BUFFER);
 			free(BUFFER);
 		}
 		sleep(CONTROL_TIME); // Controlla la fifo ogni due secondi
@@ -123,6 +123,5 @@ void avviaDottore(int num){
 }
 
 void terminazione(){
-	printf("\n---- Ricevuto SIGQUIT, eliminazione strutture in corso ----\n");
 	esc = true;
 }

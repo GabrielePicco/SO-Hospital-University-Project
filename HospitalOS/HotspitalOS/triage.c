@@ -50,11 +50,13 @@ int main(int argc, char** argv) {
 		}
 
 		if(errno != EINTR){
-			printf("Triage: PID e sintomo del paziente: %s\n", msg.mtext);
+			
 			// recupero pid e sintomo da mtext
 			 sintomo = getSintomo(msg.mtext);
 			 pid_paziente = getPazientePid(msg.mtext);
 			 priorita = getPriorita(sintomo,fpSintomi);
+
+			 printf("\n>- Triage: Accolgo il paziente(PID=%s) con il sintomo \"%s\" e gli associo la priorita': %s\n", pid_paziente,sintomo,priorita);
 
 			 sprintf(BUFFER,"%s;%s;%s",sintomo,pid_paziente,priorita);
 
@@ -248,7 +250,6 @@ void releaseSemaforoTriagePazienti(int semid){
 }
 
 void terminazione(){
-	printf("\n---- Ricevuto SIGQUIT, eliminazione strutture in corso ----\n");
 	esc = true;
 }
 

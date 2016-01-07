@@ -1,0 +1,142 @@
+
+ ----- Ingresso di un paziente nell'ospedale. 	I posti rimanenti sono: 99 -----
+
+<---- Sono il paziente appena entrato nell'ospedale, di PID (8689), con il sintomo "Epistassi" ---->
+
+
+		 |||  Uscita paziente 8689 ||| 
+
+
+***** Un paziente e' stato curato e lascia l'ospedale. 	I posti liberi sono: 97 *****
+
+<- Dottore 12 : ricevuto paziente in coda ## FIFO ## con priorità: # 4 #
+
+<- Dottore 11 : ricevuto paziente in coda ** PRIORITA' ** con priorità: * 6 *
+
+<-- Creato reparto 0 -->
+
+<-- Creato reparto 1 -->
+
+<-- Creato reparto 2 -->
+
+<-- Creato reparto 3 -->
+
+<-- Creato reparto 4 -->
+
+<-- Creato reparto 5 -->
+
+<-- Creato reparto 6 -->
+
+<-- Creato reparto 7 -->
+
+<-- Creato reparto 8 -->
+
+<-- Creato reparto 9 -->
+
+<-- Creato reparto 10 -->
+
+<-- Creato reparto 11 -->
+
+<-- Creato reparto 12 -->
+
+<-- Creato reparto 13 -->
+
+<-- Creato reparto 14 -->
+
+<-- Creato reparto 15 -->
+
+<-- Creato reparto 16 -->
+
+<-- Creato reparto 17 -->
+
+<-- Creato reparto 18 -->
+
+<-- Creato reparto 19 -->
+
+<--- Creata fifoReparto0 --->
+
+<--- Creata fifoReparto1 --->
+
+<--- Creata fifoReparto2 --->
+
+<--- Creata fifoReparto3 --->
+
+<--- Creata fifoReparto4 --->
+
+<--- Creata fifoReparto5 --->
+
+<--- Creata fifoReparto6 --->
+
+<--- Creata fifoReparto7 --->
+
+<--- Creata fifoReparto8 --->
+
+<--- Creata fifoReparto9 --->
+
+<--- Creata fifoReparto10 --->
+
+<--- Creata fifoReparto11 --->
+
+<--- Creata fifoReparto12 --->
+
+<--- Creata fifoReparto13 --->
+
+<--- Creata fifoReparto14 --->
+
+<--- Creata fifoReparto15 --->
+
+<--- Creata fifoReparto16 --->
+
+<--- Creata fifoReparto17 --->
+
+<--- Creata fifoReparto18 --->
+
+<--- Creata fifoReparto19 --->
+
+>- Triage: Accolgo il paziente(PID=8689) con il sintomo "Epistassi" e gli associo la priorita': 1
+
+
+>- Triage: Accolgo il paziente(PID=8690) con il sintomo "Aritmia" e gli associo la priorita': 9
+
+
+>- Triage: Accolgo il paziente(PID=8691) con il sintomo "Allucinazioni" e gli associo la priorita': 6
+
+
+>- Triage: Accolgo il paziente(PID=8692) con il sintomo "Dolori Addominali" e gli associo la priorita': 4
+
+
+<- Dottore 10 : ricevuto paziente in coda ** PRIORITA' ** con priorità: * 9 *
+
+<- Dottore 9 : ricevuto paziente in coda ** PRIORITA' ** con priorità: * 1 *
+
+<---- Dottore 9: paziente con PID 8689 e sintomo Epistassi curato ---->
+
+ ----- Ingresso di un paziente nell'ospedale. 	I posti rimanenti sono: 96 -----
+
+<---- Sono il paziente appena entrato nell'ospedale, di PID (8692), con il sintomo "Dolori Addominali" ---->
+
+ ----- Ingresso di un paziente nell'ospedale. 	I posti rimanenti sono: 97 -----
+
+<---- Sono il paziente appena entrato nell'ospedale, di PID (8691), con il sintomo "Allucinazioni" ---->
+
+ ----- Ingresso di un paziente nell'ospedale. 	I posti rimanenti sono: 98 -----
+
+<---- Sono il paziente appena entrato nell'ospedale, di PID (8690), con il sintomo "Aritmia" ---->
+
+<--- Semaforo di controllo degli ingressi all'ospedale creato e numero massimo dei pazienti in ingresso impostato a 100--->
+
+		****************************************
+		* Ricevuto SIGALRM, blocco del sistema *
+		****************************************
+
+----Ricevuto SIGQUIT, eliminazione strutture in corso ----
+
+#### TERMINAZIONE SISTEMA E CANCELLAZIONE STRUTTURE ####
+
+°° Reparto 12: Accolgo il paziente (sintomo;PID): "Dolori Addominali;8692" e lo inserisco in coda per essere ricevuto dal dottore°°
+
+°° Reparto 11: Accolgo il paziente (sintomo;PID): "Allucinazioni;8691" e lo inserisco in coda per essere ricevuto dal dottore°°
+
+°° Reparto 10: Accolgo il paziente (sintomo;PID): "Aritmia;8690" e lo inserisco in coda per essere ricevuto dal dottore°°
+
+°° Reparto 9: Accolgo il paziente (sintomo;PID): "Epistassi;8689" e lo inserisco in coda per essere ricevuto dal dottore°°
