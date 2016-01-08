@@ -47,6 +47,7 @@ int main(int argc, char** argv) {
 			}
 			if(msgRicevuto){
 			  printf("\n<- Dottore %d : ricevuto paziente in coda ** PRIORITA' ** con priorità: * %lu *\n",numDottore,(11-msg.mtype));
+				fflush(stdout);
 			}
 		} else {   // leggo su coda FIFO
 			msgRicevuto = true;
@@ -60,6 +61,7 @@ int main(int argc, char** argv) {
 			}
 			if(msgRicevuto){
 				printf("\n<- Dottore %d : ricevuto paziente in coda ## FIFO ## con priorità: # %lu #\n",numDottore,(11-msg.mtype));
+				fflush(stdout);
 			}
 		}
 		if(msgRicevuto){
@@ -69,7 +71,7 @@ int main(int argc, char** argv) {
 			tmpTime = ((rand() % 4)+7);   // attendo tempo casuale per erogazione prestazione tra 2 e 5 secondi
 			while((tmpTime = sleep(tmpTime)) != 0 && esc == false); // se la sleep viene interrotta da un segnale riprende da dove aveva terminato fino ad arrivare a 0
 			if(esc == false){
-				printf("\n<---- Dottore %d: paziente con PID %s e sintomo %s curato ---->\n",numDottore, pidPaz,sintomo);
+				printf("\n<---- Dottore %d: paziente con PID %s e sintomo %s curato (priorita': %lu)---->\n",numDottore, pidPaz,sintomo,(11-msg.mtype));
 				int pidPazNum = atoi(pidPaz);
 				if(kill(pidPazNum,SIGUSR1) == -1){   // invio messaggio SIGUSR1 a paziente
 					perror("Dottore: errore invio segnale SIGUSR1 a paziente\n");
